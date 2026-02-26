@@ -36,7 +36,13 @@ src/layouts/*
 src/lwc/*
 !src/lwc/cfp_*/
 !src/lwc/cfp_*/*
+!src/objects/
+src/objects/*
+!src/objects/cfp_*.*
+!src/objects/cfp_*/
+!src/objects/cfp_*/**/*
 
 # IDE and other project files
 .idea/
 .cursor/
+github_setup_guide.md
