@@ -17,7 +17,3 @@ Click the button below to deploy this project to your Salesforce sandbox. You'll
 | **Flows** | Process automation, CRUD, copy process, email notifications |
 | **LWC** | cfp_DataMovements, cfp_FunctionalProcessVisualiser |
 | **Reports & Dashboards** | Cosmic Function Points reporting |
-
-## Setup
-
-See [GITHUB_SETUP_GUIDE.md](GITHUB_SETUP_GUIDE.md) for connecting to GitHub and committing cfp_ artefacts.
