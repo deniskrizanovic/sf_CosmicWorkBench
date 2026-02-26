@@ -16,7 +16,8 @@ node_modules/
 # Only cfp_ prefixed artefacts are committed
 # Everything else in src/ is ignored
 # ===========================================
-src/
+# Use src/* (not src/) so Git traverses into src and negation rules work
+src/*
 !src/classes/
 src/classes/*
 !src/classes/cfp_*
@@ -41,6 +42,12 @@ src/objects/*
 !src/objects/cfp_*.*
 !src/objects/cfp_*/
 !src/objects/cfp_*/**/*
+!src/dashboards/
+!src/dashboards/*
+!src/dashboards/*
+!src/reports/
+!src/reports/*
+!src/reports/*
 
 # IDE and other project files
 .idea/
