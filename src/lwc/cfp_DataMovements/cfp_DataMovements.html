@@ -1,0 +1,21 @@
+<!-- functionalProcessDataTable.html -->
+<template>
+    <lightning-card title="Functional Process Data Table 00">
+        <div class="slds-m-around_medium">
+            <lightning-datatable
+                    key={key}
+                    key-field="id"
+                    data={data}
+                    columns={columns}
+                    hide-checkbox-column
+                    onsave={handleSave}
+                    draft-values={draftValues}
+                    onrowaction={handleRowAction}
+                    errors = {errors}
+            ></lightning-datatable>
+        </div>
+        <div class="slds-m-around_medium">
+            <lightning-button label="Add New Data Movement" onclick={handleAddRow}></lightning-button>
+        </div>
+    </lightning-card>
+</template>

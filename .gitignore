@@ -1,0 +1,42 @@
+.sf/
+.sfdx/
+.localdev/
+/IlluminatedCloud/
+/out/
+target/
+node_modules/
+/.illuminatedCloud/
+**/tsconfig*.json
+**/*.tsbuildinfo
+
+# Added by Illuminated Cloud
+**/graphql.config.yml
+
+# ===========================================
+# Only cfp_ prefixed artefacts are committed
+# Everything else in src/ is ignored
+# ===========================================
+src/
+!src/classes/
+src/classes/*
+!src/classes/cfp_*
+!src/triggers/
+src/triggers/*
+!src/triggers/cfp_*
+!src/flows/
+src/flows/*
+!src/flows/cfp_*
+!src/flexipages/
+src/flexipages/*
+!src/flexipages/cfp_*
+!src/layouts/
+src/layouts/*
+!src/layouts/cfp_*
+!src/lwc/
+src/lwc/*
+!src/lwc/cfp_*/
+!src/lwc/cfp_*/*
+
+# IDE and other project files
+.idea/
+.cursor/
