@@ -6,7 +6,7 @@ Salesforce CFP (Functional Process) artefacts — Cosmic Function Points workben
 
 Click the button below to deploy this project to your Salesforce sandbox. You'll be prompted to authorize your org via OAuth.
 
-[![Deploy to Sandbox](https://raw.githubusercontent.com/afawcett/githubsfdeploy/master/deploy.png)](https://githubsfdeploy.herokuapp.com/app/githubdeploy/deniskrizanovic/sf_CosmicWorkbench)
+[![Deploy to Sandbox](https://raw.githubusercontent.com/afawcett/githubsfdeploy/master/deploy.png)](https://githubsfdeploy.herokuapp.com/app/githubdeploy/deniskrizanovic/sf_CosmicWorkbench?ref=main)
 
 ## Contents
 
