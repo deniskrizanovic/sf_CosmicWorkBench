@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>cfp_Estimated_Size__c</fullName>
+    <externalId>false</externalId>
+    <formula>CASE(
+  cfp_Early_And_Rapid_Estimation_Size__c,
+  &quot;Small&quot;,  5,
+  &quot;Medium&quot;,  8,
+  &quot;Large&quot;, 14,
+		&quot;Very Large&quot;, 30,
+  0)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Estimated Size</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>0</scale>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

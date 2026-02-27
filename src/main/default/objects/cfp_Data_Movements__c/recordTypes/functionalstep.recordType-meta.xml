@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RecordType xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>functionalstep</fullName>
+    <active>true</active>
+    <label>functionalstep</label>
+    <picklistValues>
+        <picklist>cfp_implementationtype__c</picklist>
+        <values>
+            <fullName>Action Button</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Apex</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Compact Layout</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Criteria Search and Filter</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Data Processing Engine</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Data Raptor</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Document Template</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Email Template</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Exp Builder</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Flexipage</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Page Layout</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Screen Flow</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>VisualForce</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>aura</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>automation rule</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>bre</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>config</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>dataweave</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>flexcard</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>flow</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>listview</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>lwc</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>omniscript</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>ootb</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>report</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>tbd</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>workflow</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>cfp_movementtype__c</picklist>
+        <values>
+            <fullName>E</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>R</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>W</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>X</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+</RecordType>

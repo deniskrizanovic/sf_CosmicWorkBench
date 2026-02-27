@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>cfp_incompleteSteps__c</fullName>
+    <label>inComplete Steps</label>
+    <summaryFilterItems>
+        <field>cfp_Data_Movements__c.cfp_isComplete__c</field>
+        <operation>equals</operation>
+        <value>False</value>
+    </summaryFilterItems>
+    <summaryForeignKey>cfp_Data_Movements__c.cfp_FunctionalProcess__c</summaryForeignKey>
+    <summaryOperation>count</summaryOperation>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Summary</type>
+</CustomField>

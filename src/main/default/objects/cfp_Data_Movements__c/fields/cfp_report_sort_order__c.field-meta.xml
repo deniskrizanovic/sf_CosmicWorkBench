@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>cfp_report_sort_order__c</fullName>
+    <externalId>false</externalId>
+    <formula>CASE(cfp_Implemenation_Category__c, 
+&apos;ootb&apos;, 0, 
+&apos;config&apos;, 1, 
+&apos;lowcode&apos;, 3,
+&apos;procode&apos;, 4,
+5 )</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>report sort order</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>0</scale>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

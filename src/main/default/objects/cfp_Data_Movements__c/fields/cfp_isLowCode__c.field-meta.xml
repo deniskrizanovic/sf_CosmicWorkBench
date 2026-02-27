@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>cfp_isLowCode__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF(ispickval(cfp_implementationtype__c,&apos;bre&apos;) || 
+			ispickval(cfp_implementationtype__c, &apos;flexcard&apos;) || 
+			ispickval(cfp_implementationtype__c, &apos;flow&apos;) ||
+			ispickval(cfp_implementationtype__c, &apos;omniscript&apos;) || 
+			ispickval(cfp_implementationtype__c, &apos;Data Raptor&apos;) || 
+			ispickval(cfp_implementationtype__c, &apos;Document Template&apos;) || 
+			ispickval(cfp_implementationtype__c, &apos;Exp Builder&apos;) || 		
+			ispickval(cfp_implementationtype__c, &apos;Data Processing Engine&apos;) || 		
+			ispickval(cfp_implementationtype__c, &apos;Screen Flow&apos;), 
+			IF(cfp_is_API_Call__c, 2, 1),
+			0)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>isLowCode</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>0</scale>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

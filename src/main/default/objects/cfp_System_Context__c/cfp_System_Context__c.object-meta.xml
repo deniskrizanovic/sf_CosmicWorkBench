@@ -156,28 +156,14 @@
     <enableSharing>true</enableSharing>
     <enableStreamingApi>true</enableStreamingApi>
     <externalSharingModel>Private</externalSharingModel>
-    <fields>
-        <fullName>cfp_Description__c</fullName>
-        <label>Description</label>
-        <length>32768</length>
-        <trackHistory>false</trackHistory>
-        <trackTrending>false</trackTrending>
-        <type>Html</type>
-        <visibleLines>25</visibleLines>
-    </fields>
     <label>System Context</label>
-    <listViews>
-        <fullName>All</fullName>
-        <filterScope>Everything</filterScope>
-        <label>All</label>
-    </listViews>
     <nameField>
         <label>System Context Name</label>
         <trackHistory>false</trackHistory>
         <type>Text</type>
     </nameField>
     <pluralLabel>System Contexts</pluralLabel>
-    <searchLayouts/>
+    <searchLayouts></searchLayouts>
     <sharingModel>ReadWrite</sharingModel>
     <visibility>Public</visibility>
 </CustomObject>

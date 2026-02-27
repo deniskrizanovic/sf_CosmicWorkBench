@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>cfp_implementationtype__c</fullName>
+    <label>Implementation Type</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>true</sorted>
+            <value>
+                <fullName>Action Button</fullName>
+                <default>false</default>
+                <label>Action Button</label>
+            </value>
+            <value>
+                <fullName>Apex</fullName>
+                <default>false</default>
+                <label>Apex</label>
+            </value>
+            <value>
+                <fullName>aura</fullName>
+                <default>false</default>
+                <label>aura</label>
+            </value>
+            <value>
+                <fullName>automation rule</fullName>
+                <default>false</default>
+                <label>automation rule</label>
+            </value>
+            <value>
+                <fullName>bre</fullName>
+                <default>false</default>
+                <label>bre</label>
+            </value>
+            <value>
+                <fullName>Compact Layout</fullName>
+                <default>false</default>
+                <label>Compact Layout</label>
+            </value>
+            <value>
+                <fullName>config</fullName>
+                <default>false</default>
+                <label>config</label>
+            </value>
+            <value>
+                <fullName>Criteria Search and Filter</fullName>
+                <default>false</default>
+                <label>Criteria Search and Filter</label>
+            </value>
+            <value>
+                <fullName>Data Processing Engine</fullName>
+                <default>false</default>
+                <label>Data Processing Engine</label>
+            </value>
+            <value>
+                <fullName>Data Raptor</fullName>
+                <default>false</default>
+                <label>Data Raptor</label>
+            </value>
+            <value>
+                <fullName>dataweave</fullName>
+                <default>false</default>
+                <label>dataweave</label>
+            </value>
+            <value>
+                <fullName>Document Template</fullName>
+                <default>false</default>
+                <label>Document Template</label>
+            </value>
+            <value>
+                <fullName>Email Template</fullName>
+                <default>false</default>
+                <label>Email Template</label>
+            </value>
+            <value>
+                <fullName>Exp Builder</fullName>
+                <default>false</default>
+                <label>Exp Builder</label>
+            </value>
+            <value>
+                <fullName>flexcard</fullName>
+                <default>false</default>
+                <label>flexcard</label>
+            </value>
+            <value>
+                <fullName>Flexipage</fullName>
+                <default>false</default>
+                <label>Flexipage</label>
+            </value>
+            <value>
+                <fullName>flow</fullName>
+                <default>false</default>
+                <label>flow</label>
+            </value>
+            <value>
+                <fullName>listview</fullName>
+                <default>false</default>
+                <label>listview</label>
+            </value>
+            <value>
+                <fullName>lwc</fullName>
+                <default>false</default>
+                <label>lwc</label>
+            </value>
+            <value>
+                <fullName>omniscript</fullName>
+                <default>false</default>
+                <label>omniscript</label>
+            </value>
+            <value>
+                <fullName>ootb</fullName>
+                <default>false</default>
+                <label>ootb</label>
+            </value>
+            <value>
+                <fullName>Page Layout</fullName>
+                <default>false</default>
+                <label>Page Layout</label>
+            </value>
+            <value>
+                <fullName>report</fullName>
+                <default>false</default>
+                <label>report</label>
+            </value>
+            <value>
+                <fullName>Screen Flow</fullName>
+                <default>false</default>
+                <label>Screen Flow</label>
+            </value>
+            <value>
+                <fullName>tbd</fullName>
+                <default>false</default>
+                <label>tbd</label>
+            </value>
+            <value>
+                <fullName>VisualForce</fullName>
+                <default>false</default>
+                <label>VisualForce</label>
+            </value>
+            <value>
+                <fullName>workflow</fullName>
+                <default>false</default>
+                <label>workflow</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

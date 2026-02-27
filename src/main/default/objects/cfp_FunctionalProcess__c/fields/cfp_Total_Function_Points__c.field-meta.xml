@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>cfp_Total_Function_Points__c</fullName>
+    <externalId>false</externalId>
+    <formula>cfp_Sum_of_Config__c +  cfp_Sum_Of_ootb__c  +  cfp_Sum_of_LowCode__c +  cfp_Sum_of_ProCode__c</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Total Function Points</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>0</scale>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

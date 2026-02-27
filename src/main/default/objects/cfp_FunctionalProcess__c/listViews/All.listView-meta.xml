@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>All</fullName>
+    <columns>NAME</columns>
+    <columns>cfp_inComplete__c</columns>
+    <columns>cfp_incompleteSteps__c</columns>
+    <columns>cfp_Order__c</columns>
+    <columns>cfp_Total_Function_Points__c</columns>
+    <columns>cfp_System_Context__c</columns>
+    <filterScope>Everything</filterScope>
+    <label>All</label>
+</ListView>

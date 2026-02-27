@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>CityOfMarion</fullName>
+    <columns>NAME</columns>
+    <columns>cfp_Total_Function_Points__c</columns>
+    <columns>cfp_Sum_of_Config__c</columns>
+    <columns>cfp_Sum_of_LowCode__c</columns>
+    <columns>cfp_Sum_Of_ootb__c</columns>
+    <columns>cfp_Sum_of_ProCode__c</columns>
+    <columns>cfp_Order__c</columns>
+    <columns>cfp_Sub_System__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>cfp_System_Context__c</field>
+        <operation>equals</operation>
+        <value>CoM - cfSuite</value>
+    </filters>
+    <label>CityOfMarion</label>
+</ListView>

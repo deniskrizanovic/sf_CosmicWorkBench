@@ -128,11 +128,14 @@
     </actionOverrides>
     <actionOverrides>
         <actionName>View</actionName>
-        <type>Default</type>
+        <comment>Action override created by Lightning App Builder during activation.</comment>
+        <content>cfp_Data_Movement_Record_Page</content>
+        <formFactor>Large</formFactor>
+        <skipRecordTypeSelect>false</skipRecordTypeSelect>
+        <type>Flexipage</type>
     </actionOverrides>
     <actionOverrides>
         <actionName>View</actionName>
-        <formFactor>Large</formFactor>
         <type>Default</type>
     </actionOverrides>
     <actionOverrides>
@@ -152,61 +155,16 @@
     <enableSearch>true</enableSearch>
     <enableSharing>true</enableSharing>
     <enableStreamingApi>true</enableStreamingApi>
-    <externalSharingModel>Private</externalSharingModel>
-    <fields>
-        <fullName>cfp_Attributes__c</fullName>
-        <label>Attributes</label>
-        <length>32768</length>
-        <trackHistory>false</trackHistory>
-        <trackTrending>false</trackTrending>
-        <type>LongTextArea</type>
-        <visibleLines>3</visibleLines>
-    </fields>
-    <fields>
-        <fullName>cfp_Comments__c</fullName>
-        <label>Comments</label>
-        <length>32768</length>
-        <trackHistory>false</trackHistory>
-        <trackTrending>false</trackTrending>
-        <type>Html</type>
-        <visibleLines>25</visibleLines>
-    </fields>
-    <fields>
-        <fullName>cfp_Object_Name__c</fullName>
-        <externalId>false</externalId>
-        <label>Object Name</label>
-        <length>255</length>
-        <required>false</required>
-        <trackHistory>false</trackHistory>
-        <trackTrending>false</trackTrending>
-        <type>Text</type>
-        <unique>false</unique>
-    </fields>
-    <fields>
-        <fullName>cfp_System_Context__c</fullName>
-        <deleteConstraint>SetNull</deleteConstraint>
-        <label>System Context</label>
-        <referenceTo>cfp_System_Context__c</referenceTo>
-        <relationshipLabel>DataGroups</relationshipLabel>
-        <relationshipName>dk_DataGroups</relationshipName>
-        <required>false</required>
-        <trackHistory>false</trackHistory>
-        <trackTrending>false</trackTrending>
-        <type>Lookup</type>
-    </fields>
-    <label>DataGroups</label>
-    <listViews>
-        <fullName>All</fullName>
-        <filterScope>Everything</filterScope>
-        <label>All</label>
-    </listViews>
+    <externalSharingModel>ControlledByParent</externalSharingModel>
+    <label>Data Movement</label>
     <nameField>
-        <label>dk_DataGroups Name</label>
+        <label>Step Name</label>
         <trackHistory>false</trackHistory>
         <type>Text</type>
     </nameField>
-    <pluralLabel>DataGroups</pluralLabel>
-    <searchLayouts/>
-    <sharingModel>ReadWrite</sharingModel>
+    <pluralLabel>Data Movements</pluralLabel>
+    <recordTypeTrackHistory>false</recordTypeTrackHistory>
+    <searchLayouts></searchLayouts>
+    <sharingModel>ControlledByParent</sharingModel>
     <visibility>Public</visibility>
 </CustomObject>

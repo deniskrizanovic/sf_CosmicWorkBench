@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>cfp_isConfig__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF(
+  ISPICKVAL(cfp_implementationtype__c, &apos;listview&apos;), 
+  cfp_Number_of_ListViews__c, 
+  IF(
+    ISPICKVAL(cfp_implementationtype__c, &apos;report&apos;), 
+    2 * cfp_Number_of_Reports__c,
+    IF(
+      ISPICKVAL(cfp_implementationtype__c, &apos;automation rule&apos;) ||
+      ISPICKVAL(cfp_implementationtype__c, &apos;Compact Layout&apos;) ||
+      ISPICKVAL(cfp_implementationtype__c, &apos;config&apos;) ||
+      ISPICKVAL(cfp_implementationtype__c, &apos;Flexipage&apos;) ||
+      ISPICKVAL(cfp_implementationtype__c, &apos;Page Layout&apos;) ||
+      ISPICKVAL(cfp_implementationtype__c, &apos;Email Template&apos;) ||
+      ISPICKVAL(cfp_implementationtype__c, &apos;Action Button&apos;) ||
+      ISPICKVAL(cfp_implementationtype__c, &apos;Criteria Search and Filter&apos;) ||
+      ISPICKVAL(cfp_implementationtype__c, &apos;workflow&apos;),
+      IF(cfp_is_API_Call__c, 2, 1),
+      0
+    )
+  )
+)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>isConfig</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>0</scale>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

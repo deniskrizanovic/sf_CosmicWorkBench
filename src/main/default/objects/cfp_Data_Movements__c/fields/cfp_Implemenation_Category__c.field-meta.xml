@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>cfp_Implemenation_Category__c</fullName>
+    <externalId>false</externalId>
+    <formula>CASE(TEXT(cfp_implementationtype__c),
+  &apos;automation rule&apos;, &apos;config&apos;,
+  &apos;Compact Layout&apos;, &apos;config&apos;,
+  &apos;config&apos;, &apos;config&apos;,
+  &apos;Flexipage&apos;, &apos;config&apos;,
+  &apos;Page Layout&apos;, &apos;config&apos;,
+  &apos;listview&apos;, &apos;config&apos;,
+  &apos;Email Template&apos;, &apos;config&apos;,
+  &apos;Action Button&apos;, &apos;config&apos;,
+  &apos;workflow&apos;, &apos;config&apos;,
+  &apos;bre&apos;, &apos;lowcode&apos;,
+  &apos;flexcard&apos;, &apos;lowcode&apos;,
+  &apos;flow&apos;, &apos;lowcode&apos;,
+  &apos;omniscript&apos;, &apos;lowcode&apos;,
+  &apos;Data Raptor&apos;, &apos;lowcode&apos;,
+  &apos;Document Template&apos;, &apos;lowcode&apos;,
+  &apos;Screen Flow&apos;, &apos;lowcode&apos;,
+		&apos;ootb&apos;, &apos;ootb&apos;,
+		&apos;apex&apos;, &apos;procode&apos;,
+		&apos;aura&apos;, &apos;procode&apos;,
+		&apos;lwc&apos;, &apos;procode&apos;,
+		&apos;dataweave&apos;, &apos;procode&apos;,
+		&apos;VisualForce&apos;, &apos;procode&apos;,
+		&apos;Exp Builder&apos;, &apos;lowcode&apos;,
+		&apos;report&apos;, &apos;config&apos;,
+&apos;Data Processing Engine&apos;, &apos;lowcode&apos;,
+&apos;Criteria Search and Filter&apos;, &apos;config&apos;,
+  &apos;No Category Mapping&apos;
+)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Implementation Category</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>
