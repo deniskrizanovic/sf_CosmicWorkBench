@@ -248,7 +248,7 @@
         <numberOfColumns>12</numberOfColumns>
         <rowHeight>36</rowHeight>
     </dashboardGridLayout>
-    <dashboardType>SpecifiedDashboard</dashboardType>
+    <dashboardType>LoggedInUser</dashboardType>
     <isGridLayout>true</isGridLayout>
     <textColor>#000000</textColor>
     <title>Cosmic Dashboard</title>
