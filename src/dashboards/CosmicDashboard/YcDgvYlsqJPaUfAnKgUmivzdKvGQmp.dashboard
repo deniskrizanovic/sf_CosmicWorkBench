@@ -248,7 +248,7 @@
         <numberOfColumns>12</numberOfColumns>
         <rowHeight>36</rowHeight>
     </dashboardGridLayout>
-    <dashboardType>MyDashboard</dashboardType>
+    <dashboardType>SpecifiedDashboard</dashboardType>
     <isGridLayout>true</isGridLayout>
     <textColor>#000000</textColor>
     <title>Cosmic Dashboard</title>
