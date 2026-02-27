@@ -37,10 +37,10 @@ src/main/default/flexipages/*
 !src/main/default/layouts/
 src/main/default/layouts/*
 !src/main/default/layouts/cfp_*
-!src/main/lwc/
-src/main/lwc/*
-!src/main/lwc/cfp_*/
-!src/main/lwc/cfp_*/*
+!src/main/default/lwc/
+src/main/default/lwc/*
+!src/main/default/lwc/cfp_*/
+!src/main/default/lwc/cfp_*/*
 !src/main/default/objects/
 src/main/default/objects/*
 !src/main/default/objects/cfp_*.*
