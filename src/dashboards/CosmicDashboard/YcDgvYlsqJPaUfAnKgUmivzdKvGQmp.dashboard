@@ -248,10 +248,8 @@
         <numberOfColumns>12</numberOfColumns>
         <rowHeight>36</rowHeight>
     </dashboardGridLayout>
-    <dashboardType>SpecifiedUser</dashboardType>
+    <dashboardType>MyDashboard</dashboardType>
     <isGridLayout>true</isGridLayout>
-    <owner>dkrizanovic@dkrizanovic-240702-397.demo</owner>
-    <runningUser>dkrizanovic@dkrizanovic-240702-397.demo</runningUser>
     <textColor>#000000</textColor>
     <title>Cosmic Dashboard</title>
     <titleColor>#000000</titleColor>
