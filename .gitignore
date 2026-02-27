@@ -55,6 +55,9 @@ src/main/default/quickActions/*
 !src/main/default/reports/
 !src/main/default/reports/*
 !src/main/default/reports/*
+!src/main/default/permissionsets/
+src/main/default/permissionsets/*
+!src/main/default/permissionsets/cfp_*
 
 # IDE and other project files
 .idea/
