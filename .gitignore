@@ -46,6 +46,9 @@ src/main/default/objects/*
 !src/main/default/objects/cfp_*.*
 !src/main/default/objects/cfp_*/
 !src/main/default/objects/cfp_*/**/*
+!src/main/default/quickActions/
+src/main/default/quickActions/*
+!src/main/default/quickActions/cfp_*
 !src/main/default/dashboards/
 !src/main/default/dashboards/*
 !src/main/default/dashboards/*
