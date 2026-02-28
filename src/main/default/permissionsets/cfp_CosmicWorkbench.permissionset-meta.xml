@@ -256,6 +256,16 @@
         <viewAllFields>false</viewAllFields>
         <viewAllRecords>true</viewAllRecords>
     </objectPermissions>
+    <objectPermissions>
+        <allowCreate>true</allowCreate>
+        <allowDelete>true</allowDelete>
+        <allowEdit>true</allowEdit>
+        <allowRead>true</allowRead>
+        <modifyAllRecords>true</modifyAllRecords>
+        <object>cfp_System_Context__c</object>
+        <viewAllFields>false</viewAllFields>
+        <viewAllRecords>true</viewAllRecords>
+    </objectPermissions>
     <recordTypeVisibilities>
         <recordType>cfp_Data_Movements__c.functionalstep</recordType>
         <visible>true</visible>
@@ -270,6 +280,10 @@
     </tabSettings>
     <tabSettings>
         <tab>cfp_FunctionalProcess__c</tab>
+        <visibility>Visible</visibility>
+    </tabSettings>
+    <tabSettings>
+        <tab>cfp_System_Context__c</tab>
         <visibility>Visible</visibility>
     </tabSettings>
 </PermissionSet>
