@@ -18,7 +18,6 @@
     <tabs>cfp_Dashboard</tabs>
     <tabs>cfp_System_Context__c</tabs>
     <uiType>Lightning</uiType>
-    <utilityBar>dkCosmicWorkbench_UtilityBar</utilityBar>
     <workspaceConfig>
         <mappings>
             <tab>cfp_Dashboard</tab>
