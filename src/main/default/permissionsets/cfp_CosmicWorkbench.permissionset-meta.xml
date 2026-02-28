@@ -11,6 +11,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>cfp_DataGroups__c.cfp_External_Id__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>cfp_DataGroups__c.cfp_Comments__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -27,6 +32,11 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>cfp_Data_Movements__c.cfp_DataGroups__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>cfp_Data_Movements__c.cfp_External_Id__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -140,6 +150,11 @@
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
+        <editable>true</editable>
+        <field>cfp_FunctionalProcess__c.cfp_External_Id__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
         <editable>false</editable>
         <field>cfp_FunctionalProcess__c.cfp_Estimated_Size__c</field>
         <readable>true</readable>
@@ -222,6 +237,11 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>cfp_System_Context__c.cfp_Description__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>cfp_System_Context__c.cfp_External_Id__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <hasActivationRequired>false</hasActivationRequired>
