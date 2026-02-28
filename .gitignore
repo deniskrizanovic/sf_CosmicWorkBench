@@ -61,6 +61,9 @@ src/main/default/permissionsets/*
 !src/main/default/tabs/
 src/main/default/tabs/*
 !src/main/default/tabs/cfp_*
+!src/main/default/applications/
+src/main/default/applications/*
+!src/main/default/applications/cfp_*
 
 # IDE and other project files
 .idea/
