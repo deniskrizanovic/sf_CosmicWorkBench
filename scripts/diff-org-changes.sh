@@ -23,6 +23,9 @@ mkdir -p "$TMP_DIR"
 # Generate manifest from local source (covers all metadata in the project)
 sf project generate manifest --source-dir src --name diff-package --output-dir "$TMP_DIR"
 
+# Rewrite Flow members to use active version numbers (avoids retrieving wrong/draft version)
+python3 "$SCRIPT_DIR/ensure-active-flow-versions.py" "$TMP_DIR/diff-package.xml" --org "$TARGET_ORG"
+
 # Retrieve from org (output must be inside project)
 sf project retrieve start \
   --target-org "$TARGET_ORG" \
