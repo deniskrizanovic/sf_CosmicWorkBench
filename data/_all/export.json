@@ -1,0 +1,29 @@
+{
+  "objects": [],
+  "objectSets": [
+      {
+          "objects": [
+              {
+                  "query": "SELECT Id, Name, cfp_Description__c, cfp_External_Id__c FROM cfp_System_Context__c",
+                  "externalId": "Name",
+                  "operation": "Upsert"
+              },
+              {
+                  "query": "SELECT Id, Name, cfp_Attributes__c, cfp_Comments__c, cfp_External_Id__c, cfp_Object_Name__c, cfp_System_Context__c FROM cfp_DataGroups__c",
+                  "externalId": "Name",
+                  "operation": "Upsert"
+              },
+              {
+                  "query": "SELECT Id, Name, cfp_Early_And_Rapid_Estimation_Size__c, cfp_External_Id__c, cfp_Order__c, cfp_Sub_System__c, cfp_System_Context__c, cfp_Texttual_Overview__c, cfp_is_reUsed__c, cfp_triggeringevent__c FROM cfp_FunctionalProcess__c",
+                  "externalId": "Name",
+                  "operation": "Upsert"
+              },
+              {
+                  "query": "SELECT Id, Name, RecordTypeId, cfp_DataGroups__c, cfp_External_Id__c, cfp_FunctionalProcess__c, cfp_Needs_Review__c, cfp_Number_of_ListViews__c, cfp_Number_of_Reports__c, cfp_Reused_Functional_Step__c, cfp_Reused_from_Functional_Process__c, cfp_comments__c, cfp_implementationtype__c, cfp_is_API_Call__c, cfp_is_reUsed__c, cfp_movementtype__c, cfp_order__c FROM cfp_Data_Movements__c",
+                  "externalId": "Name",
+                  "operation": "Upsert"
+              }
+          ]
+      }
+  ]
+}
