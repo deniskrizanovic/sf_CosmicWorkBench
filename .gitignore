@@ -70,3 +70,9 @@ src/main/default/applications/*
 .cursor/
 .DS_Store
 github_setup_guide.md
+
+# SFDMU working files
+data/_all/logs/
+data/_all/reports/
+data/_all/source/
+data/_all/target/
