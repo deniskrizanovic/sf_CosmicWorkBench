@@ -39,7 +39,7 @@
             <assignToReference>singleDataMovement.cfp_DataGroups__c</assignToReference>
             <operator>Assign</operator>
             <value>
-                <stringValue>a8XQE0000006So12AE</stringValue>
+                <elementReference>getEventMonitoringDataGroup.Id</elementReference>
             </value>
         </assignmentItems>
         <assignmentItems>
@@ -97,7 +97,7 @@
             <assignToReference>singleDataMovement.cfp_DataGroups__c</assignToReference>
             <operator>Assign</operator>
             <value>
-                <stringValue>a8XQE0000006Skn2AE</stringValue>
+                <elementReference>getFieldHistoryDataGroup.Id</elementReference>
             </value>
         </assignmentItems>
         <assignmentItems>
@@ -155,7 +155,7 @@
             <assignToReference>singleDataMovement.cfp_DataGroups__c</assignToReference>
             <operator>Assign</operator>
             <value>
-                <stringValue>a8XQE0000006SmP2AU</stringValue>
+                <elementReference>getFullTextSearchDataGroup.Id</elementReference>
             </value>
         </assignmentItems>
         <assignmentItems>
@@ -213,7 +213,7 @@
             <assignToReference>singleDataMovement.cfp_DataGroups__c</assignToReference>
             <operator>Assign</operator>
             <value>
-                <stringValue>a8XQE0000006Spd2AE</stringValue>
+                <elementReference>getStatusErrorsDataGroup.Id</elementReference>
             </value>
         </assignmentItems>
         <assignmentItems>
@@ -257,7 +257,7 @@
             <assignToReference>singleDataMovement.cfp_DataGroups__c</assignToReference>
             <operator>Assign</operator>
             <value>
-                <stringValue>a8XQE0000006KaL2AU</stringValue>
+                <elementReference>getTriggerDataGroup.Id</elementReference>
             </value>
         </assignmentItems>
         <assignmentItems>
@@ -321,11 +321,172 @@
         <locationY>863</locationY>
         <inputReference>DMsToInsert</inputReference>
     </recordCreates>
+    <recordLookups>
+        <name>getSystemContext</name>
+        <label>getSystemContext</label>
+        <locationX>176</locationX>
+        <locationY>68</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>getTriggerDataGroup</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Name</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>Salesforce Platform Features</stringValue>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>cfp_System_Context__c</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordLookups>
+        <name>getTriggerDataGroup</name>
+        <label>getTriggerDataGroup</label>
+        <locationX>176</locationX>
+        <locationY>134</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>getFullTextSearchDataGroup</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Name</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>trigger</stringValue>
+            </value>
+        </filters>
+        <filters>
+            <field>cfp_System_Context__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>getSystemContext.Id</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>cfp_DataGroups__c</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordLookups>
+        <name>getFullTextSearchDataGroup</name>
+        <label>getFullTextSearchDataGroup</label>
+        <locationX>176</locationX>
+        <locationY>200</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>getFieldHistoryDataGroup</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Name</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>Full Text Search</stringValue>
+            </value>
+        </filters>
+        <filters>
+            <field>cfp_System_Context__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>getSystemContext.Id</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>cfp_DataGroups__c</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordLookups>
+        <name>getFieldHistoryDataGroup</name>
+        <label>getFieldHistoryDataGroup</label>
+        <locationX>176</locationX>
+        <locationY>266</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>getEventMonitoringDataGroup</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Name</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>Field History</stringValue>
+            </value>
+        </filters>
+        <filters>
+            <field>cfp_System_Context__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>getSystemContext.Id</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>cfp_DataGroups__c</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordLookups>
+        <name>getEventMonitoringDataGroup</name>
+        <label>getEventMonitoringDataGroup</label>
+        <locationX>176</locationX>
+        <locationY>332</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>getStatusErrorsDataGroup</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Name</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>Event Monitoring Logs</stringValue>
+            </value>
+        </filters>
+        <filters>
+            <field>cfp_System_Context__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>getSystemContext.Id</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>cfp_DataGroups__c</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordLookups>
+        <name>getStatusErrorsDataGroup</name>
+        <label>getStatusErrorsDataGroup</label>
+        <locationX>176</locationX>
+        <locationY>398</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>createTriggerDM</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Name</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>status/errors/etc</stringValue>
+            </value>
+        </filters>
+        <filters>
+            <field>cfp_System_Context__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>getSystemContext.Id</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>cfp_DataGroups__c</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
     <start>
         <locationX>50</locationX>
         <locationY>0</locationY>
         <connector>
-            <targetReference>createTriggerDM</targetReference>
+            <targetReference>getSystemContext</targetReference>
         </connector>
         <object>cfp_FunctionalProcess__c</object>
         <recordTriggerType>Create</recordTriggerType>

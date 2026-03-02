@@ -8,11 +8,22 @@ private class cfp_DataMovementsOrderingTest {
 
     @TestSetup
     static void setup() {
+        cfp_System_Context__c sysCtx = new cfp_System_Context__c(
+            Name = 'Salesforce Platform Features'
+        );
+        insert sysCtx;
 
-        cfp_FunctionalProcess__c fp = new cfp_FunctionalProcess__c();
-        fp.Name = 'Test FP';
+        List<cfp_DataGroups__c> dgs = new List<cfp_DataGroups__c>{
+            new cfp_DataGroups__c(Name = 'trigger', cfp_System_Context__c = sysCtx.Id),
+            new cfp_DataGroups__c(Name = 'Full Text Search', cfp_System_Context__c = sysCtx.Id),
+            new cfp_DataGroups__c(Name = 'Field History', cfp_System_Context__c = sysCtx.Id),
+            new cfp_DataGroups__c(Name = 'Event Monitoring Logs', cfp_System_Context__c = sysCtx.Id),
+            new cfp_DataGroups__c(Name = 'status/errors/etc', cfp_System_Context__c = sysCtx.Id)
+        };
+        insert dgs;
+
+        cfp_FunctionalProcess__c fp = new cfp_FunctionalProcess__c(Name = 'Test FP');
         insert fp;
-
     }
 
     @IsTest
