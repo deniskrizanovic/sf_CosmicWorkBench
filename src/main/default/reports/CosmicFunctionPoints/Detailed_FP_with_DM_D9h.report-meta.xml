@@ -20,7 +20,6 @@
         <aggregateTypes>Sum</aggregateTypes>
         <field>cfp_Data_Movements__c.cfp_order__c</field>
     </columns>
-    <currency>USD</currency>
     <customDetailFormulas>
         <calculatedFormula>cfp_Data_Movements__c.cfp_isConfig__c+cfp_Data_Movements__c.cfp_isLowCode__c+cfp_Data_Movements__c.cfp_isOOTB__c+cfp_Data_Movements__c.cfp_isProCode__c</calculatedFormula>
         <dataType>Double</dataType>

@@ -30,7 +30,6 @@
         <aggregateTypes>Sum</aggregateTypes>
         <field>cfp_FunctionalProcess__c.cfp_Order__c</field>
     </columns>
-    <currency>USD</currency>
     <format>Tabular</format>
     <name>Functional Processes Size</name>
     <params>
