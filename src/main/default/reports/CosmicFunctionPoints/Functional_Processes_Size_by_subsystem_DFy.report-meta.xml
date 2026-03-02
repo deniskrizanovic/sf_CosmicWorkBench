@@ -30,7 +30,6 @@
         <aggregateTypes>Sum</aggregateTypes>
         <field>cfp_FunctionalProcess__c.cfp_Total_Function_Points__c</field>
     </columns>
-    <currency>USD</currency>
     <filter>
         <criteriaItems>
             <column>cfp_FunctionalProcess__c.cfp_System_Context__c</column>

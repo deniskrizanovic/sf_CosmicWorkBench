@@ -71,6 +71,9 @@ src/main/default/applications/*
 .DS_Store
 github_setup_guide.md
 
+# diff-org-changes.sh working dir
+.tmp-org-retrieve/
+
 # SFDMU working files
 data/_all/logs/
 data/_all/reports/
