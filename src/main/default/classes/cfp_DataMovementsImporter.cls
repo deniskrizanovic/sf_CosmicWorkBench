@@ -41,8 +41,36 @@ public with sharing class cfp_DataMovementsImporter {
             try {
                 validateRequest(req);
                 Id functionalProcessId = (Id) req.functionalProcessId;
+                String systemContextToken = getFunctionalProcessSystemContextToken(functionalProcessId);
+                // #region agent log
+                debugLog(
+                    'H1',
+                    'cfp_DataMovementsImporter.importFromJson',
+                    'Resolved functional process system context token',
+                    new Map<String, Object>{
+                        'functionalProcessId' => functionalProcessId,
+                        'systemContextToken' => systemContextToken
+                    },
+                    String.valueOf(functionalProcessId)
+                );
+                // #endregion
                 PayloadRoot payload = parsePayload(req.jsonPayload);
-                List<cfp_Data_Movements__c> rowsToInsert = buildRows(payload, functionalProcessId, implementationTypeMap);
+                Map<String, Id> dataGroupByExternalId = resolveDataGroupsByExternalId(payload, systemContextToken);
+                // #region agent log
+                debugLog(
+                    'H2',
+                    'cfp_DataMovementsImporter.importFromJson',
+                    'Resolved data groups by external id',
+                    new Map<String, Object>{
+                        'resolvedExternalIds' => new List<String>(dataGroupByExternalId.keySet()),
+                        'resolvedCount' => dataGroupByExternalId.size()
+                    },
+                    String.valueOf(functionalProcessId)
+                );
+                // #endregion
+                Set<String> unresolvedDataGroupRefs = new Set<String>();
+                List<cfp_Data_Movements__c> rowsToInsert =
+                    buildRows(payload, functionalProcessId, implementationTypeMap, dataGroupByExternalId, unresolvedDataGroupRefs, systemContextToken);
 
                 Boolean replaceExisting = req.replaceExistingForProcess == true;
                 if (replaceExisting) {
@@ -62,6 +90,11 @@ public with sharing class cfp_DataMovementsImporter {
 
                 res.success = true;
                 res.insertedCount = rowsToInsert.size();
+                if (!unresolvedDataGroupRefs.isEmpty()) {
+                    List<String> unresolvedSorted = new List<String>(unresolvedDataGroupRefs);
+                    unresolvedSorted.sort();
+                    res.errorMessage = 'Unresolved dataGroupRef values (non-blocking): ' + String.join(unresolvedSorted, ', ');
+                }
             } catch (Exception ex) {
                 res.errorMessage = ex.getMessage();
             }
@@ -112,7 +145,10 @@ public with sharing class cfp_DataMovementsImporter {
     private static List<cfp_Data_Movements__c> buildRows(
         PayloadRoot payload,
         Id functionalProcessId,
-        Map<String, String> implementationTypeMap
+        Map<String, String> implementationTypeMap,
+        Map<String, Id> dataGroupByExternalId,
+        Set<String> unresolvedDataGroupRefs,
+        String systemContextToken
     ) {
         List<cfp_Data_Movements__c> rows = new List<cfp_Data_Movements__c>();
         for (Map<String, Object> movement : payload.dataMovements) {
@@ -125,10 +161,79 @@ public with sharing class cfp_DataMovementsImporter {
             String implTypeRaw = asString(movement.get('implementationType'));
             row.cfp_implementationtype__c = normalizeImplementationType(implTypeRaw, implementationTypeMap);
 
+            String dataGroupRef = asString(movement.get('dataGroupRef'));
+            String externalId = cfp_DataGroupExternalIdUtil.buildExternalIdFromDataGroupRef(systemContextToken, dataGroupRef);
+            if (!String.isBlank(externalId) && dataGroupByExternalId.containsKey(externalId)) {
+                row.cfp_DataGroups__c = dataGroupByExternalId.get(externalId);
+            } else if (!String.isBlank(dataGroupRef)) {
+                unresolvedDataGroupRefs.add(dataGroupRef);
+            }
+            // #region agent log
+            debugLog(
+                'H3',
+                'cfp_DataMovementsImporter.buildRows',
+                'Data movement dataGroupRef resolution decision',
+                new Map<String, Object>{
+                    'movementName' => row.Name,
+                    'dataGroupRef' => dataGroupRef,
+                    'computedExternalId' => externalId,
+                    'wasResolved' => !String.isBlank(externalId) && dataGroupByExternalId.containsKey(externalId),
+                    'assignedDataGroupId' => row.cfp_DataGroups__c
+                },
+                String.valueOf(functionalProcessId)
+            );
+            // #endregion
+
             row.cfp_is_API_Call__c = asBoolean(movement.get('isApiCall'));
             rows.add(row);
         }
         return rows;
+    }
+
+    private static Map<String, Id> resolveDataGroupsByExternalId(PayloadRoot payload, String systemContextToken) {
+        Set<String> keys = new Set<String>();
+        for (Map<String, Object> movement : payload.dataMovements) {
+            String dataGroupRef = asString(movement.get('dataGroupRef'));
+            String key = cfp_DataGroupExternalIdUtil.buildExternalIdFromDataGroupRef(systemContextToken, dataGroupRef);
+            if (!String.isBlank(key)) {
+                keys.add(key);
+            }
+        }
+        // #region agent log
+        debugLog(
+            'H4',
+            'cfp_DataMovementsImporter.resolveDataGroupsByExternalId',
+            'Computed lookup keys from payload dataGroupRef values',
+            new Map<String, Object>{
+                'systemContextToken' => systemContextToken,
+                'lookupKeys' => new List<String>(keys)
+            },
+            systemContextToken
+        );
+        // #endregion
+        if (keys.isEmpty()) {
+            return new Map<String, Id>();
+        }
+
+        Map<String, Id> byExternalId = new Map<String, Id>();
+        for (cfp_DataGroups__c dg : [
+            SELECT Id, cfp_External_Id__c
+            FROM cfp_DataGroups__c
+            WHERE cfp_External_Id__c IN :keys
+        ]) {
+            byExternalId.put(dg.cfp_External_Id__c, dg.Id);
+        }
+        return byExternalId;
+    }
+
+    private static String getFunctionalProcessSystemContextToken(Id functionalProcessId) {
+        cfp_FunctionalProcess__c fp = [
+            SELECT cfp_System_Context__c, cfp_System_Context__r.Name
+            FROM cfp_FunctionalProcess__c
+            WHERE Id = :functionalProcessId
+            LIMIT 1
+        ];
+        return fp.cfp_System_Context__r != null ? fp.cfp_System_Context__r.Name : null;
     }
 
     private static Map<String, String> buildImplementationTypeMap() {
@@ -176,5 +281,24 @@ public with sharing class cfp_DataMovementsImporter {
             return (Boolean) value;
         }
         return String.valueOf(value).toLowerCase() == 'true';
+    }
+
+    private static void debugLog(
+        String hypothesisId,
+        String location,
+        String message,
+        Map<String, Object> data,
+        String runId
+    ) {
+        Map<String, Object> payload = new Map<String, Object>{
+            'sessionId' => 'e1c571',
+            'runId' => runId,
+            'hypothesisId' => hypothesisId,
+            'location' => location,
+            'message' => message,
+            'data' => data,
+            'timestamp' => DateTime.now().getTime()
+        };
+        System.debug('AGENT_DEBUG ' + JSON.serialize(payload));
     }
 }
