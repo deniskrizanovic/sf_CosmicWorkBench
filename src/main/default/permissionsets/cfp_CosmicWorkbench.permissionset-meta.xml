@@ -11,12 +11,12 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>cfp_DataGroups__c.cfp_External_Id__c</field>
+        <field>cfp_DataGroups__c.cfp_Comments__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>cfp_DataGroups__c.cfp_Comments__c</field>
+        <field>cfp_DataGroups__c.cfp_External_Id__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -35,13 +35,13 @@
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>cfp_Data_Movements__c.cfp_External_Id__c</field>
+        <editable>false</editable>
+        <field>cfp_Data_Movements__c.cfp_Data_Group_Name__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
-        <editable>false</editable>
-        <field>cfp_Data_Movements__c.cfp_Data_Group_Name__c</field>
+        <editable>true</editable>
+        <field>cfp_Data_Movements__c.cfp_External_Id__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -82,6 +82,11 @@
     <fieldPermissions>
         <editable>false</editable>
         <field>cfp_Data_Movements__c.cfp_System_Context__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>cfp_Data_Movements__c.cfp_artifactName__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -150,13 +155,13 @@
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>cfp_FunctionalProcess__c.cfp_External_Id__c</field>
+        <editable>false</editable>
+        <field>cfp_FunctionalProcess__c.cfp_Estimated_Size__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
-        <editable>false</editable>
-        <field>cfp_FunctionalProcess__c.cfp_Estimated_Size__c</field>
+        <editable>true</editable>
+        <field>cfp_FunctionalProcess__c.cfp_External_Id__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
