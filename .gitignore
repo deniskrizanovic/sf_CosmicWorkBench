@@ -67,7 +67,9 @@ src/main/default/applications/*
 
 # IDE and other project files
 .idea/
-.cursor/
+.cursor/*
+!.cursor/plans/
+!.cursor/rules/
 .DS_Store
 github_setup_guide.md
 

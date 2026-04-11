@@ -1,0 +1,11 @@
+---
+description: Enforce plan storage location and naming convention
+globs: .cursor/plans/*.md
+---
+
+# Plan Management
+
+- ALWAYS store implementation plans in `.cursor/plans/`.
+- ALWAYS prefix plan filenames with the creation date in `YYYY-MM-DD-` format (e.g., `2026-04-12-my-feature.plan.md`).
+- If `.cursor/plans/` directory missing, create it.
+- Use `CreatePlan` tool normally, then rename/move result to match this convention.
