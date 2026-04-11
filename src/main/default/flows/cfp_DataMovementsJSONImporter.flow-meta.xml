@@ -20,7 +20,7 @@
         <inputParameters>
             <name>jsonPayload</name>
             <value>
-                <elementReference>JSON_Payload2</elementReference>
+                <elementReference>JSON_Payload</elementReference>
             </value>
         </inputParameters>
         <inputParameters>
@@ -71,6 +71,9 @@
         <fields>
             <name>FunctionalProcessId</name>
             <dataType>String</dataType>
+            <defaultValue>
+                <stringValue>a3S92000001EbvBEAS</stringValue>
+            </defaultValue>
             <fieldText>Functional Process Id</fieldText>
             <fieldType>InputField</fieldType>
             <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
@@ -85,27 +88,11 @@
             </styleProperties>
         </fields>
         <fields>
-            <name>JSON_Payload2</name>
-            <fieldText>JSON Payload2</fieldText>
+            <name>JSON_Payload</name>
+            <fieldText>JSON Payload</fieldText>
             <fieldType>LargeTextArea</fieldType>
             <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
-            <isRequired>false</isRequired>
-            <styleProperties>
-                <verticalAlignment>
-                    <stringValue>top</stringValue>
-                </verticalAlignment>
-                <width>
-                    <stringValue>12</stringValue>
-                </width>
-            </styleProperties>
-        </fields>
-        <fields>
-            <name>JsonPayload</name>
-            <dataType>String</dataType>
-            <fieldText>JSON Payload</fieldText>
-            <fieldType>InputField</fieldType>
-            <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
-            <isRequired>false</isRequired>
+            <isRequired>true</isRequired>
             <styleProperties>
                 <verticalAlignment>
                     <stringValue>top</stringValue>
@@ -144,7 +131,7 @@
         <allowPause>false</allowPause>
         <fields>
             <name>FinishedText</name>
-            <fieldText>&lt;p&gt;Import request submitted to Apex.&lt;/p&gt;&lt;p&gt;{!Run_DataMovements_Importer.success}&lt;/p&gt;&lt;p&gt;{!Run_DataMovements_Importer.insertedCount}&lt;/p&gt;&lt;p&gt;{!Run_DataMovements_Importer.errorMessage}&lt;/p&gt;</fieldText>
+            <fieldText>&lt;p&gt;Import request submitted to Apex.&lt;/p&gt;&lt;p&gt;Status: {!Run_DataMovements_Importer.success}&lt;/p&gt;&lt;p&gt;InsertedCount:{!Run_DataMovements_Importer.insertedCount}&lt;/p&gt;&lt;p&gt;ErrorMessages:{!Run_DataMovements_Importer.errorMessage}&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
             <styleProperties>
                 <verticalAlignment>
