@@ -253,4 +253,32 @@ private class cfp_DataMovementsImporterTest {
         System.assertEquals(dg.Id, rows[0].cfp_DataGroups__c, 'Known reference should still be linked.');
         System.assertEquals(null, rows[1].cfp_DataGroups__c, 'Unknown reference should stay blank (non-blocking).');
     }
+
+    private static String buildPayloadWithWarnings() {
+        return '{"dataMovements":[' +
+            '{"name":"Test Movement","order":1,"movementType":"E","dataGroupRef":"WorkOrder","implementationType":"flexipage","isApiCall":false}' +
+            '], "traversalWarnings": ["Warning 1", "Warning 2"]}';
+    }
+
+    @IsTest
+    static void testImporterParsesTraversalWarnings() {
+        cfp_FunctionalProcess__c fp = createFunctionalProcess('Importer Warnings Test');
+
+        cfp_DataMovementsImporter.Request req = new cfp_DataMovementsImporter.Request();
+        req.functionalProcessId = fp.Id;
+        req.jsonPayload = buildPayloadWithWarnings();
+
+        Test.startTest();
+        List<cfp_DataMovementsImporter.Response> results =
+            cfp_DataMovementsImporter.importFromJson(new List<cfp_DataMovementsImporter.Request>{ req });
+        Test.stopTest();
+
+        System.assertEquals(true, results[0].success);
+        System.assertNotEquals(null, results[0].traversalWarnings);
+        System.assertEquals(2, results[0].traversalWarnings.size());
+        System.assertEquals('Warning 1', results[0].traversalWarnings[0]);
+        System.assertEquals('Warning 2', results[0].traversalWarnings[1]);
+        System.assert(results[0].traversalWarningsString.contains('Warning 1'));
+        System.assert(results[0].traversalWarningsString.contains('Warning 2'));
+    }
 }

@@ -19,10 +19,17 @@ public with sharing class cfp_DataMovementsImporter {
 
         @InvocableVariable
         public String errorMessage;
+
+        @InvocableVariable
+        public List<String> traversalWarnings;
+
+        @InvocableVariable
+        public String traversalWarningsString;
     }
 
     private class PayloadRoot {
         public List<Map<String, Object>> dataMovements;
+        public List<String> traversalWarnings;
     }
 
     @InvocableMethod(
@@ -90,10 +97,14 @@ public with sharing class cfp_DataMovementsImporter {
 
                 res.success = true;
                 res.insertedCount = rowsToInsert.size();
+                res.traversalWarnings = payload.traversalWarnings;
+                if (res.traversalWarnings != null && !res.traversalWarnings.isEmpty()) {
+                    res.traversalWarningsString = String.join(res.traversalWarnings, '\n\n');
+                }
                 if (!unresolvedDataGroupRefs.isEmpty()) {
                     List<String> unresolvedSorted = new List<String>(unresolvedDataGroupRefs);
                     unresolvedSorted.sort();
-                    res.errorMessage = 'Unresolved dataGroupRef values (non-blocking): ' + String.join(unresolvedSorted, ', ');
+                    res.errorMessage = 'Unresolved dataGroupRef values (non-blocking): ' + String.join(unresolvedSorted, ',\n ');
                 }
             } catch (Exception ex) {
                 res.errorMessage = ex.getMessage();
@@ -137,6 +148,14 @@ public with sharing class cfp_DataMovementsImporter {
         for (Object movementObj : (List<Object>) dataMovementsObj) {
             if (movementObj instanceof Map<String, Object>) {
                 root.dataMovements.add((Map<String, Object>) movementObj);
+            }
+        }
+
+        Object warningsObj = rootMap.get('traversalWarnings');
+        if (warningsObj instanceof List<Object>) {
+            root.traversalWarnings = new List<String>();
+            for (Object warn : (List<Object>) warningsObj) {
+                root.traversalWarnings.add(String.valueOf(warn));
             }
         }
         return root;

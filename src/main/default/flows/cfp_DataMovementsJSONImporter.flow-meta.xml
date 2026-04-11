@@ -131,7 +131,7 @@
         <allowPause>false</allowPause>
         <fields>
             <name>FinishedText</name>
-            <fieldText>&lt;p&gt;Import request submitted to Apex.&lt;/p&gt;&lt;p&gt;Status: {!Run_DataMovements_Importer.success}&lt;/p&gt;&lt;p&gt;InsertedCount:{!Run_DataMovements_Importer.insertedCount}&lt;/p&gt;&lt;p&gt;ErrorMessages:{!Run_DataMovements_Importer.errorMessage}&lt;/p&gt;</fieldText>
+            <fieldText>&lt;p&gt;Import request submitted to Apex.&lt;/p&gt;&lt;p&gt;Status: {!Run_DataMovements_Importer.success}&lt;/p&gt;&lt;p&gt;InsertedCount:{!Run_DataMovements_Importer.insertedCount}&lt;/p&gt;&lt;p&gt;ErrorMessages:{!Run_DataMovements_Importer.errorMessage}&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;strong&gt;Traversal Warnings (Next Steps):&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;{!Run_DataMovements_Importer.traversalWarningsString}&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
             <styleProperties>
                 <verticalAlignment>
