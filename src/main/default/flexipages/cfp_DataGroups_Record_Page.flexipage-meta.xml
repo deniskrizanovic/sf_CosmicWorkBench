@@ -71,8 +71,8 @@
                     <name>uiBehavior</name>
                     <value>none</value>
                 </fieldInstanceProperties>
-                <fieldItem>Record.cfp_movementtype__c</fieldItem>
-                <identifier>Recordcfp_movementtype_cField</identifier>
+                <fieldItem>Record.cfp_Attributes__c</fieldItem>
+                <identifier>Recordcfp_Attributes_cField</identifier>
             </fieldInstance>
         </itemInstances>
         <itemInstances>
@@ -80,26 +80,6 @@
                 <fieldInstanceProperties>
                     <name>uiBehavior</name>
                     <value>none</value>
-                </fieldInstanceProperties>
-                <fieldItem>Record.cfp_DataGroups__c</fieldItem>
-                <identifier>Recordcfp_DataGroups_cField</identifier>
-            </fieldInstance>
-        </itemInstances>
-        <itemInstances>
-            <fieldInstance>
-                <fieldInstanceProperties>
-                    <name>uiBehavior</name>
-                    <value>none</value>
-                </fieldInstanceProperties>
-                <fieldItem>Record.cfp_implementationtype__c</fieldItem>
-                <identifier>Recordcfp_implementationtype_cField</identifier>
-            </fieldInstance>
-        </itemInstances>
-        <itemInstances>
-            <fieldInstance>
-                <fieldInstanceProperties>
-                    <name>uiBehavior</name>
-                    <value>readonly</value>
                 </fieldInstanceProperties>
                 <fieldItem>Record.cfp_System_Context__c</fieldItem>
                 <identifier>Recordcfp_System_Context_cField</identifier>
@@ -107,11 +87,29 @@
         </itemInstances>
         <itemInstances>
             <fieldInstance>
-                <fieldItem>Record.cfp_artifactName__c</fieldItem>
-                <identifier>Recordcfp_artifactName__cField</identifier>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
+                <fieldItem>Record.cfp_Object_Name__c</fieldItem>
+                <identifier>Recordcfp_Object_Name_cField</identifier>
             </fieldInstance>
         </itemInstances>
-        <name>Facet-e33c2046-39b3-4f0f-8d0a-1ebbf186263f</name>
+        <name>Facet-9e2a3cc9-328b-4c69-8740-ffb924136b4a</name>
+        <type>Facet</type>
+    </flexiPageRegions>
+    <flexiPageRegions>
+        <itemInstances>
+            <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
+                <fieldItem>Record.RecordTypeId</fieldItem>
+                <identifier>RecordRecordTypeIdField</identifier>
+            </fieldInstance>
+        </itemInstances>
+        <name>Facet-4657fd6d-1be6-4810-b5c1-dc271f05cd6a</name>
         <type>Facet</type>
     </flexiPageRegions>
     <flexiPageRegions>
@@ -119,61 +117,23 @@
             <componentInstance>
                 <componentInstanceProperties>
                     <name>body</name>
-                    <value>Facet-e33c2046-39b3-4f0f-8d0a-1ebbf186263f</value>
+                    <value>Facet-9e2a3cc9-328b-4c69-8740-ffb924136b4a</value>
                 </componentInstanceProperties>
                 <componentName>flexipage:column</componentName>
                 <identifier>flexipage_column</identifier>
             </componentInstance>
         </itemInstances>
-        <name>Facet-96f84fbf-3e8b-4fc0-a513-372d8d939274</name>
-        <type>Facet</type>
-    </flexiPageRegions>
-    <flexiPageRegions>
-        <itemInstances>
-            <fieldInstance>
-                <fieldInstanceProperties>
-                    <name>uiBehavior</name>
-                    <value>none</value>
-                </fieldInstanceProperties>
-                <fieldItem>Record.cfp_comments__c</fieldItem>
-                <identifier>Recordcfp_comments_cField</identifier>
-            </fieldInstance>
-        </itemInstances>
-        <itemInstances>
-            <fieldInstance>
-                <fieldInstanceProperties>
-                    <name>uiBehavior</name>
-                    <value>none</value>
-                </fieldInstanceProperties>
-                <fieldItem>Record.cfp_Needs_Review__c</fieldItem>
-                <identifier>Recordcfp_Needs_Review_cField</identifier>
-            </fieldInstance>
-        </itemInstances>
-        <itemInstances>
-            <fieldInstance>
-                <fieldInstanceProperties>
-                    <name>uiBehavior</name>
-                    <value>none</value>
-                </fieldInstanceProperties>
-                <fieldItem>Record.cfp_External_Id__c</fieldItem>
-                <identifier>Recordcfp_External_Id_cField</identifier>
-            </fieldInstance>
-        </itemInstances>
-        <name>Facet-b8b18a8e-6d5e-4a82-acce-bb257a376041</name>
-        <type>Facet</type>
-    </flexiPageRegions>
-    <flexiPageRegions>
         <itemInstances>
             <componentInstance>
                 <componentInstanceProperties>
                     <name>body</name>
-                    <value>Facet-b8b18a8e-6d5e-4a82-acce-bb257a376041</value>
+                    <value>Facet-4657fd6d-1be6-4810-b5c1-dc271f05cd6a</value>
                 </componentInstanceProperties>
                 <componentName>flexipage:column</componentName>
                 <identifier>flexipage_column2</identifier>
             </componentInstance>
         </itemInstances>
-        <name>Facet-e532de26-436d-4feb-897e-07df5c0936a0</name>
+        <name>Facet-3bfc1fc4-32e8-41a8-9d7c-ce3335393887</name>
         <type>Facet</type>
     </flexiPageRegions>
     <flexiPageRegions>
@@ -181,127 +141,13 @@
             <fieldInstance>
                 <fieldInstanceProperties>
                     <name>uiBehavior</name>
-                    <value>required</value>
-                </fieldInstanceProperties>
-                <fieldItem>Record.cfp_FunctionalProcess__c</fieldItem>
-                <identifier>Recordcfp_FunctionalProcess_cField</identifier>
-            </fieldInstance>
-        </itemInstances>
-        <itemInstances>
-            <fieldInstance>
-                <fieldInstanceProperties>
-                    <name>uiBehavior</name>
-                    <value>readonly</value>
-                </fieldInstanceProperties>
-                <fieldItem>Record.cfp_isComplete__c</fieldItem>
-                <identifier>Recordcfp_isComplete_cField</identifier>
-            </fieldInstance>
-        </itemInstances>
-        <itemInstances>
-            <fieldInstance>
-                <fieldInstanceProperties>
-                    <name>uiBehavior</name>
-                    <value>readonly</value>
-                </fieldInstanceProperties>
-                <fieldItem>Record.cfp_order__c</fieldItem>
-                <identifier>Recordcfp_order_cField</identifier>
-            </fieldInstance>
-        </itemInstances>
-        <itemInstances>
-            <fieldInstance>
-                <fieldInstanceProperties>
-                    <name>uiBehavior</name>
                     <value>none</value>
                 </fieldInstanceProperties>
-                <fieldItem>Record.cfp_is_reUsed__c</fieldItem>
-                <identifier>Recordcfp_is_reUsed_cField</identifier>
+                <fieldItem>Record.cfp_Comments__c</fieldItem>
+                <identifier>Recordcfp_Comments_cField</identifier>
             </fieldInstance>
         </itemInstances>
-        <itemInstances>
-            <fieldInstance>
-                <fieldInstanceProperties>
-                    <name>uiBehavior</name>
-                    <value>readonly</value>
-                </fieldInstanceProperties>
-                <fieldItem>Record.cfp_Implemenation_Category__c</fieldItem>
-                <identifier>Recordcfp_Implemenation_Category_cField</identifier>
-            </fieldInstance>
-        </itemInstances>
-        <itemInstances>
-            <fieldInstance>
-                <fieldInstanceProperties>
-                    <name>uiBehavior</name>
-                    <value>none</value>
-                </fieldInstanceProperties>
-                <fieldItem>Record.cfp_Number_of_ListViews__c</fieldItem>
-                <identifier>Recordcfp_Number_of_ListViews_cField</identifier>
-            </fieldInstance>
-        </itemInstances>
-        <itemInstances>
-            <fieldInstance>
-                <fieldInstanceProperties>
-                    <name>uiBehavior</name>
-                    <value>none</value>
-                </fieldInstanceProperties>
-                <fieldItem>Record.cfp_Number_of_Reports__c</fieldItem>
-                <identifier>Recordcfp_Number_of_Reports_cField</identifier>
-            </fieldInstance>
-        </itemInstances>
-        <itemInstances>
-            <fieldInstance>
-                <fieldInstanceProperties>
-                    <name>uiBehavior</name>
-                    <value>none</value>
-                </fieldInstanceProperties>
-                <fieldItem>Record.cfp_is_API_Call__c</fieldItem>
-                <identifier>Recordcfp_is_API_Call_cField</identifier>
-            </fieldInstance>
-        </itemInstances>
-        <name>Facet-48d1c0af-79c3-4eba-8024-7aa513b951db</name>
-        <type>Facet</type>
-    </flexiPageRegions>
-    <flexiPageRegions>
-        <itemInstances>
-            <fieldInstance>
-                <fieldInstanceProperties>
-                    <name>uiBehavior</name>
-                    <value>readonly</value>
-                </fieldInstanceProperties>
-                <fieldItem>Record.cfp_isLowCode__c</fieldItem>
-                <identifier>Recordcfp_isLowCode_cField</identifier>
-            </fieldInstance>
-        </itemInstances>
-        <itemInstances>
-            <fieldInstance>
-                <fieldInstanceProperties>
-                    <name>uiBehavior</name>
-                    <value>readonly</value>
-                </fieldInstanceProperties>
-                <fieldItem>Record.cfp_isProCode__c</fieldItem>
-                <identifier>Recordcfp_isProCode_cField</identifier>
-            </fieldInstance>
-        </itemInstances>
-        <itemInstances>
-            <fieldInstance>
-                <fieldInstanceProperties>
-                    <name>uiBehavior</name>
-                    <value>readonly</value>
-                </fieldInstanceProperties>
-                <fieldItem>Record.cfp_isConfig__c</fieldItem>
-                <identifier>Recordcfp_isConfig_cField</identifier>
-            </fieldInstance>
-        </itemInstances>
-        <itemInstances>
-            <fieldInstance>
-                <fieldInstanceProperties>
-                    <name>uiBehavior</name>
-                    <value>readonly</value>
-                </fieldInstanceProperties>
-                <fieldItem>Record.cfp_isOOTB__c</fieldItem>
-                <identifier>Recordcfp_isOOTB_cField</identifier>
-            </fieldInstance>
-        </itemInstances>
-        <name>Facet-9e15555b-74d1-40fa-bc4b-33629b6d2985</name>
+        <name>Facet-8dfce1dc-d4cf-4aa5-9164-3d153c7dbc47</name>
         <type>Facet</type>
     </flexiPageRegions>
     <flexiPageRegions>
@@ -309,61 +155,41 @@
             <componentInstance>
                 <componentInstanceProperties>
                     <name>body</name>
-                    <value>Facet-48d1c0af-79c3-4eba-8024-7aa513b951db</value>
+                    <value>Facet-8dfce1dc-d4cf-4aa5-9164-3d153c7dbc47</value>
                 </componentInstanceProperties>
                 <componentName>flexipage:column</componentName>
                 <identifier>flexipage_column3</identifier>
             </componentInstance>
         </itemInstances>
-        <itemInstances>
-            <componentInstance>
-                <componentInstanceProperties>
-                    <name>body</name>
-                    <value>Facet-9e15555b-74d1-40fa-bc4b-33629b6d2985</value>
-                </componentInstanceProperties>
-                <componentName>flexipage:column</componentName>
-                <identifier>flexipage_column4</identifier>
-            </componentInstance>
-        </itemInstances>
-        <name>Facet-9c1c5cea-655d-4693-8122-b63805c87635</name>
+        <name>Facet-e65dce23-45ee-444d-af19-10a5e7a75bd7</name>
         <type>Facet</type>
     </flexiPageRegions>
     <flexiPageRegions>
-        <itemInstances>
-            <fieldInstance>
-                <fieldInstanceProperties>
-                    <name>uiBehavior</name>
-                    <value>none</value>
-                </fieldInstanceProperties>
-                <fieldItem>Record.cfp_Reused_Functional_Step__c</fieldItem>
-                <identifier>Recordcfp_Reused_Functional_Step_cField</identifier>
-            </fieldInstance>
-        </itemInstances>
-        <itemInstances>
-            <fieldInstance>
-                <fieldInstanceProperties>
-                    <name>uiBehavior</name>
-                    <value>none</value>
-                </fieldInstanceProperties>
-                <fieldItem>Record.cfp_Reused_from_Functional_Process__c</fieldItem>
-                <identifier>Recordcfp_Reused_from_Functional_Process_cField</identifier>
-            </fieldInstance>
-        </itemInstances>
         <itemInstances>
             <fieldInstance>
                 <fieldInstanceProperties>
                     <name>uiBehavior</name>
                     <value>readonly</value>
                 </fieldInstanceProperties>
-                <fieldItem>Record.cfp_Reused_from_System_Context__c</fieldItem>
-                <identifier>Recordcfp_Reused_from_System_Context_cField</identifier>
+                <fieldItem>Record.CreatedById</fieldItem>
+                <identifier>RecordCreatedByIdField</identifier>
             </fieldInstance>
         </itemInstances>
-        <name>Facet-41e6db93-b45d-4d6b-9389-31fc86576418</name>
+        <name>Facet-0d7c0bed-d366-4689-a3dc-4462a86091e2</name>
         <type>Facet</type>
     </flexiPageRegions>
     <flexiPageRegions>
-        <name>Facet-a312c366-9323-494a-ae70-4c9c122a176a</name>
+        <itemInstances>
+            <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>readonly</value>
+                </fieldInstanceProperties>
+                <fieldItem>Record.LastModifiedById</fieldItem>
+                <identifier>RecordLastModifiedByIdField</identifier>
+            </fieldInstance>
+        </itemInstances>
+        <name>Facet-49e5ce10-7134-41d6-886e-f44b5d914eb0</name>
         <type>Facet</type>
     </flexiPageRegions>
     <flexiPageRegions>
@@ -371,23 +197,23 @@
             <componentInstance>
                 <componentInstanceProperties>
                     <name>body</name>
-                    <value>Facet-41e6db93-b45d-4d6b-9389-31fc86576418</value>
+                    <value>Facet-0d7c0bed-d366-4689-a3dc-4462a86091e2</value>
+                </componentInstanceProperties>
+                <componentName>flexipage:column</componentName>
+                <identifier>flexipage_column4</identifier>
+            </componentInstance>
+        </itemInstances>
+        <itemInstances>
+            <componentInstance>
+                <componentInstanceProperties>
+                    <name>body</name>
+                    <value>Facet-49e5ce10-7134-41d6-886e-f44b5d914eb0</value>
                 </componentInstanceProperties>
                 <componentName>flexipage:column</componentName>
                 <identifier>flexipage_column5</identifier>
             </componentInstance>
         </itemInstances>
-        <itemInstances>
-            <componentInstance>
-                <componentInstanceProperties>
-                    <name>body</name>
-                    <value>Facet-a312c366-9323-494a-ae70-4c9c122a176a</value>
-                </componentInstanceProperties>
-                <componentName>flexipage:column</componentName>
-                <identifier>flexipage_column6</identifier>
-            </componentInstance>
-        </itemInstances>
-        <name>Facet-1f194766-d266-4e32-9bd8-0b85d1a8cbd2</name>
+        <name>Facet-0a9b2e8f-2201-4926-8af5-bea09662d704</name>
         <type>Facet</type>
     </flexiPageRegions>
     <flexiPageRegions>
@@ -395,7 +221,7 @@
             <componentInstance>
                 <componentInstanceProperties>
                     <name>columns</name>
-                    <value>Facet-96f84fbf-3e8b-4fc0-a513-372d8d939274</value>
+                    <value>Facet-3bfc1fc4-32e8-41a8-9d7c-ce3335393887</value>
                 </componentInstanceProperties>
                 <componentInstanceProperties>
                     <name>horizontalAlignment</name>
@@ -413,7 +239,7 @@
             <componentInstance>
                 <componentInstanceProperties>
                     <name>columns</name>
-                    <value>Facet-e532de26-436d-4feb-897e-07df5c0936a0</value>
+                    <value>Facet-e65dce23-45ee-444d-af19-10a5e7a75bd7</value>
                 </componentInstanceProperties>
                 <componentInstanceProperties>
                     <name>horizontalAlignment</name>
@@ -421,7 +247,6 @@
                 </componentInstanceProperties>
                 <componentInstanceProperties>
                     <name>label</name>
-                    <value>Fields</value>
                 </componentInstanceProperties>
                 <componentName>flexipage:fieldSection</componentName>
                 <identifier>flexipage_fieldSection2</identifier>
@@ -431,7 +256,7 @@
             <componentInstance>
                 <componentInstanceProperties>
                     <name>columns</name>
-                    <value>Facet-9c1c5cea-655d-4693-8122-b63805c87635</value>
+                    <value>Facet-0a9b2e8f-2201-4926-8af5-bea09662d704</value>
                 </componentInstanceProperties>
                 <componentInstanceProperties>
                     <name>horizontalAlignment</name>
@@ -439,28 +264,10 @@
                 </componentInstanceProperties>
                 <componentInstanceProperties>
                     <name>label</name>
-                    <value>metadata</value>
+                    <value>@@@SFDCSystem_InformationSFDC@@@</value>
                 </componentInstanceProperties>
                 <componentName>flexipage:fieldSection</componentName>
                 <identifier>flexipage_fieldSection3</identifier>
-            </componentInstance>
-        </itemInstances>
-        <itemInstances>
-            <componentInstance>
-                <componentInstanceProperties>
-                    <name>columns</name>
-                    <value>Facet-1f194766-d266-4e32-9bd8-0b85d1a8cbd2</value>
-                </componentInstanceProperties>
-                <componentInstanceProperties>
-                    <name>horizontalAlignment</name>
-                    <value>false</value>
-                </componentInstanceProperties>
-                <componentInstanceProperties>
-                    <name>label</name>
-                    <value>Reuse metadata</value>
-                </componentInstanceProperties>
-                <componentName>flexipage:fieldSection</componentName>
-                <identifier>flexipage_fieldSection4</identifier>
             </componentInstance>
         </itemInstances>
         <mode>Replace</mode>
@@ -528,9 +335,9 @@
         <name>sidebar</name>
         <type>Region</type>
     </flexiPageRegions>
-    <masterLabel>Data Movement Record Page</masterLabel>
+    <masterLabel>DataGroups Record Page</masterLabel>
     <parentFlexiPage>flexipage__default_rec_L</parentFlexiPage>
-    <sobjectType>cfp_Data_Movements__c</sobjectType>
+    <sobjectType>cfp_DataGroups__c</sobjectType>
     <template>
         <name>flexipage:recordHomeTemplateDesktop</name>
     </template>
