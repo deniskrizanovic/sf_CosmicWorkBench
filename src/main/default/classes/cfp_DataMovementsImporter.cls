@@ -157,6 +157,7 @@ public with sharing class cfp_DataMovementsImporter {
             row.Name = asString(movement.get('name'));
             row.cfp_order__c = asDecimal(movement.get('order'));
             row.cfp_movementtype__c = asString(movement.get('movementType'));
+            row.cfp_artifactName__c = asString(movement.get('artifactName'));
 
             String implTypeRaw = asString(movement.get('implementationType'));
             row.cfp_implementationtype__c = normalizeImplementationType(implTypeRaw, implementationTypeMap);
@@ -174,8 +175,9 @@ public with sharing class cfp_DataMovementsImporter {
                 'cfp_DataMovementsImporter.buildRows',
                 'Data movement dataGroupRef resolution decision',
                 new Map<String, Object>{
-                    'movementName' => row.Name,
-                    'dataGroupRef' => dataGroupRef,
+                'movementName' => row.Name,
+                'artifactName' => row.cfp_artifactName__c,
+                'dataGroupRef' => dataGroupRef,
                     'computedExternalId' => externalId,
                     'wasResolved' => !String.isBlank(externalId) && dataGroupByExternalId.containsKey(externalId),
                     'assignedDataGroupId' => row.cfp_DataGroups__c

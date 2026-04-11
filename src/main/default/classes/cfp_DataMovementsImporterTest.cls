@@ -22,8 +22,8 @@ private class cfp_DataMovementsImporterTest {
 
     private static String buildPayload() {
         return '{"dataMovements":[' +
-            '{"name":"Open record page (WorkOrder)","order":1,"movementType":"E","dataGroupRef":"WorkOrder","implementationType":"flexipage","isApiCall":false},' +
-            '{"name":"Read page record (WorkOrder)","order":2,"movementType":"R","dataGroupRef":"WorkOrder","implementationType":"flexipage","isApiCall":false}' +
+            '{"name":"Open record page (WorkOrder)","order":1,"movementType":"E","dataGroupRef":"WorkOrder","implementationType":"flexipage","isApiCall":false,"artifactName":"WO_Record_Page"},' +
+            '{"name":"Read page record (WorkOrder)","order":2,"movementType":"R","dataGroupRef":"WorkOrder","implementationType":"flexipage","isApiCall":false,"artifactName":"WO_Record_Page"}' +
         ']}';
     }
 
@@ -73,7 +73,7 @@ private class cfp_DataMovementsImporterTest {
         System.assertEquals(beforeCount + 2, afterCount, 'Importer should add exactly 2 rows.');
 
         List<cfp_Data_Movements__c> rows = [
-            SELECT Name, cfp_order__c, cfp_movementtype__c, cfp_implementationtype__c, cfp_is_API_Call__c, cfp_FunctionalProcess__c
+            SELECT Name, cfp_order__c, cfp_movementtype__c, cfp_implementationtype__c, cfp_is_API_Call__c, cfp_FunctionalProcess__c, cfp_artifactName__c
             FROM cfp_Data_Movements__c
             WHERE cfp_FunctionalProcess__c = :fp.Id
             AND Name = 'Open record page (WorkOrder)'
@@ -85,6 +85,7 @@ private class cfp_DataMovementsImporterTest {
         System.assertEquals('E', rows[0].cfp_movementtype__c);
         System.assertEquals('Flexipage', rows[0].cfp_implementationtype__c, 'Expected picklist normalization from flexipage -> Flexipage');
         System.assertEquals(false, rows[0].cfp_is_API_Call__c);
+        System.assertEquals('WO_Record_Page', rows[0].cfp_artifactName__c);
     }
 
     @IsTest
