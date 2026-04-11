@@ -99,7 +99,16 @@ public with sharing class cfp_DataMovementsImporter {
                 res.insertedCount = rowsToInsert.size();
                 res.traversalWarnings = payload.traversalWarnings;
                 if (res.traversalWarnings != null && !res.traversalWarnings.isEmpty()) {
-                    res.traversalWarningsString = String.join(res.traversalWarnings, '\n\n');
+                    List<String> formatted = new List<String>();
+                    for (String warn : res.traversalWarnings) {
+                        Integer colonIndex = warn.indexOf(': ');
+                        if (colonIndex != -1) {
+                            formatted.add('<b>' + warn.substring(0, colonIndex) + '</b>' + warn.substring(colonIndex));
+                        } else {
+                            formatted.add(warn);
+                        }
+                    }
+                    res.traversalWarningsString = String.join(formatted, '<br/>');
                 }
                 if (!unresolvedDataGroupRefs.isEmpty()) {
                     List<String> unresolvedSorted = new List<String>(unresolvedDataGroupRefs);

@@ -257,7 +257,7 @@ private class cfp_DataMovementsImporterTest {
     private static String buildPayloadWithWarnings() {
         return '{"dataMovements":[' +
             '{"name":"Test Movement","order":1,"movementType":"E","dataGroupRef":"WorkOrder","implementationType":"flexipage","isApiCall":false}' +
-            '], "traversalWarnings": ["Warning 1", "Warning 2"]}';
+            '], "traversalWarnings": ["Heading 1: Warning 1", "Warning without colon"]}';
     }
 
     @IsTest
@@ -276,9 +276,10 @@ private class cfp_DataMovementsImporterTest {
         System.assertEquals(true, results[0].success);
         System.assertNotEquals(null, results[0].traversalWarnings);
         System.assertEquals(2, results[0].traversalWarnings.size());
-        System.assertEquals('Warning 1', results[0].traversalWarnings[0]);
-        System.assertEquals('Warning 2', results[0].traversalWarnings[1]);
-        System.assert(results[0].traversalWarningsString.contains('Warning 1'));
-        System.assert(results[0].traversalWarningsString.contains('Warning 2'));
+        System.assertEquals('Heading 1: Warning 1', results[0].traversalWarnings[0]);
+        System.assertEquals('Warning without colon', results[0].traversalWarnings[1]);
+        System.assert(results[0].traversalWarningsString.contains('<b>Heading 1</b>: Warning 1'));
+        System.assert(results[0].traversalWarningsString.contains('Warning without colon'));
+        System.assert(results[0].traversalWarningsString.contains('<br/>'));
     }
 }
