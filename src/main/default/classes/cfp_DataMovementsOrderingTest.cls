@@ -370,6 +370,63 @@ private class cfp_DataMovementsOrderingTest {
     }
 
     @IsTest
+    static void testBulkInsertAtPositionShouldRenumberCleanly() {
+        cfp_FunctionalProcess__c fp = [SELECT Id FROM cfp_FunctionalProcess__c WHERE Name = 'Test FP' LIMIT 1];
+
+        List<cfp_Data_Movements__c> seedSteps = new List<cfp_Data_Movements__c>();
+        for (Integer i = 1; i <= 5; i++) {
+            cfp_Data_Movements__c s = new cfp_Data_Movements__c();
+            s.cfp_FunctionalProcess__c = fp.Id;
+            s.Name = 'Seed ' + i;
+            s.cfp_implementationtype__c = 'Apex';
+            seedSteps.add(s);
+        }
+        insert seedSteps;
+
+        List<cfp_Data_Movements__c> existingBefore = [SELECT Id, Name, cfp_order__c FROM cfp_Data_Movements__c WHERE cfp_FunctionalProcess__c = :fp.Id AND cfp_order__c < 90 ORDER BY cfp_order__c ASC];
+        System.debug('existingBefore=' + existingBefore);
+        Assert.areEqual(6, existingBefore.size(), 'expected 1 default trigger step + 5 seed steps before bulk insert');
+
+        Integer insertionPoint = 3;
+        List<cfp_Data_Movements__c> bulkClones = new List<cfp_Data_Movements__c>();
+        for (Integer i = 0; i < 3; i++) {
+            cfp_Data_Movements__c c = new cfp_Data_Movements__c();
+            c.cfp_FunctionalProcess__c = fp.Id;
+            c.Name = 'Clone ' + (i + 1);
+            c.cfp_implementationtype__c = 'Apex';
+            c.cfp_order__c = insertionPoint + i;
+            bulkClones.add(c);
+        }
+
+        Test.startTest();
+        insert bulkClones;
+        Test.stopTest();
+
+        List<cfp_Data_Movements__c> after = [SELECT Id, Name, cfp_order__c FROM cfp_Data_Movements__c WHERE cfp_FunctionalProcess__c = :fp.Id AND cfp_order__c < 90 ORDER BY cfp_order__c ASC, Name ASC];
+        System.debug('afterBulkInsert=' + after);
+
+        Assert.areEqual(9, after.size(), 'expected 6 existing + 3 cloned = 9 steps below default tail');
+
+        Set<Decimal> seenOrders = new Set<Decimal>();
+        Integer expected = 1;
+        for (cfp_Data_Movements__c s : after) {
+            Assert.isFalse(seenOrders.contains(s.cfp_order__c), 'duplicate cfp_order__c found: ' + s.cfp_order__c + ' on ' + s.Name);
+            seenOrders.add(s.cfp_order__c);
+            Assert.areEqual((Decimal) expected, s.cfp_order__c, 'orders should be a contiguous 1..N sequence; mismatch on ' + s.Name);
+            expected++;
+        }
+
+        Map<String, cfp_Data_Movements__c> byName = new Map<String, cfp_Data_Movements__c>();
+        for (cfp_Data_Movements__c s : after) {
+            byName.put(s.Name, s);
+        }
+        Assert.areEqual(3, byName.get('Clone 1').cfp_order__c, 'Clone 1 should land at insertionPoint 3');
+        Assert.areEqual(4, byName.get('Clone 2').cfp_order__c, 'Clone 2 should land at insertionPoint+1 = 4');
+        Assert.areEqual(5, byName.get('Clone 3').cfp_order__c, 'Clone 3 should land at insertionPoint+2 = 5');
+    }
+
+
+    @IsTest
     static void testChangingTheOrderWithAnUpdateByMovingAStepDownTheOrder() {
 
         cfp_FunctionalProcess__c fp = [SELECT Id, Name, cfp_Total_Function_Points__c FROM cfp_FunctionalProcess__c WHERE Name = 'Test FP' limit 1];

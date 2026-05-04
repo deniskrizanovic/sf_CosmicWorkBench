@@ -8,9 +8,15 @@ public with sharing class cfp_handleOrderSetting {
     public static Set<Id> stepsPreviouslyVisitedDuringTransaction = new Set<Id>();
     static Boolean haveIRunBefore = false;
     public static List<cfp_Data_Movements__c> allTriggerContext = new List<cfp_Data_Movements__c>();
+    //Suppress recursive trigger work while we are renumbering siblings during an insert.
+    public static Boolean isReorderingInProgress = false;
 
 
     public static void doReorderForUpdate(List<cfp_Data_Movements__c> updatedStepFromTrigger, Map<Id, cfp_Data_Movements__c> oldStepsMap) {
+
+        if (isReorderingInProgress) {
+            return;
+        }
 
         System.debug('starting update');
         Set<Id> debuggingStepsDMLManagedByTriggerFramework = new Set<Id>(stepsPreviouslyVisitedDuringTransaction);
@@ -161,58 +167,133 @@ public with sharing class cfp_handleOrderSetting {
 
     public static void doReorderForInsert(List<cfp_Data_Movements__c> newStepsFromTrigger) {
 
-        allTriggerContext.addAll(newStepsFromTrigger);
-
-        List<cfp_Data_Movements__c> tempallTriggerContext = new List<cfp_Data_Movements__c>(allTriggerContext);
-        System.debug('justAddedToTriggerContextFromInsert:' + allTriggerContext.size() + ':' + allTriggerContext);
-
-        System.debug('previoslyModifed-atstart ' + stepsPreviouslyVisitedDuringTransaction);
-        List<cfp_Data_Movements__c> listForUpsertion = new List<cfp_Data_Movements__c>();
-
-        Map<Id, List<cfp_Data_Movements__c>> existingStepsMap = createMapFromExistingSteps(newStepsFromTrigger);
-
-        //Must be in the initial insert, and there are no existing steps.
-        if (existingStepsMap == null) {
+        if (isReorderingInProgress) {
             return;
         }
 
-        for (cfp_Data_Movements__c aNewStep : newStepsFromTrigger) {
-            List<cfp_Data_Movements__c> existingSteps = existingStepsMap.get(aNewStep.cfp_FunctionalProcess__c);
+        allTriggerContext.addAll(newStepsFromTrigger);
 
-            //I must be in first being created, so skip this whole reorder thing.
-            if (existingSteps.size() == 0) {
-                break;
+        Set<Id> functionalProcessIds = new Set<Id>();
+        for (cfp_Data_Movements__c s : newStepsFromTrigger) {
+            if (s.cfp_FunctionalProcess__c != null) {
+                functionalProcessIds.add(s.cfp_FunctionalProcess__c);
+            }
+        }
+
+        if (functionalProcessIds.isEmpty()) {
+            return;
+        }
+
+        Map<Id, List<cfp_Data_Movements__c>> existingByFp = new Map<Id, List<cfp_Data_Movements__c>>();
+        for (cfp_Data_Movements__c s : [
+                SELECT Id, Name, cfp_order__c, cfp_FunctionalProcess__c
+                FROM cfp_Data_Movements__c
+                WHERE cfp_FunctionalProcess__c IN :functionalProcessIds
+                AND cfp_order__c < 90
+                ORDER BY cfp_FunctionalProcess__c, cfp_order__c
+        ]) {
+            if (!existingByFp.containsKey(s.cfp_FunctionalProcess__c)) {
+                existingByFp.put(s.cfp_FunctionalProcess__c, new List<cfp_Data_Movements__c>());
+            }
+            existingByFp.get(s.cfp_FunctionalProcess__c).add(s);
+        }
+
+        Map<Id, List<cfp_Data_Movements__c>> newByFp = new Map<Id, List<cfp_Data_Movements__c>>();
+        for (cfp_Data_Movements__c s : newStepsFromTrigger) {
+            if (!newByFp.containsKey(s.cfp_FunctionalProcess__c)) {
+                newByFp.put(s.cfp_FunctionalProcess__c, new List<cfp_Data_Movements__c>());
+            }
+            newByFp.get(s.cfp_FunctionalProcess__c).add(s);
+        }
+
+        List<cfp_Data_Movements__c> existingNeedingUpdate = new List<cfp_Data_Movements__c>();
+
+        for (Id fpId : newByFp.keySet()) {
+            List<cfp_Data_Movements__c> existing = existingByFp.containsKey(fpId)
+                    ? existingByFp.get(fpId)
+                    : new List<cfp_Data_Movements__c>();
+
+            //Initial creation - no siblings to renumber against.
+            if (existing.isEmpty()) {
+                continue;
             }
 
-            if (aNewStep.cfp_order__c == null) {
-                existingSteps.add(aNewStep);
-            } else {
-                if (!newStepExistsInExistingSteps(aNewStep, existingSteps)) {
-                    existingSteps.add(Integer.valueOf(aNewStep.cfp_order__c - 1), aNewStep);
+            List<cfp_Data_Movements__c> incoming = newByFp.get(fpId);
+
+            //Stable sort the incoming records: ones with an explicit cfp_order__c first
+            //(asc), then any null-order ones at the end. Use a simple selection-style
+            //pass since Apex List<SObject>.sort() can't take a comparator without a
+            //Comparable wrapper class.
+            List<cfp_Data_Movements__c> incomingWithOrder = new List<cfp_Data_Movements__c>();
+            List<cfp_Data_Movements__c> incomingWithoutOrder = new List<cfp_Data_Movements__c>();
+            for (cfp_Data_Movements__c n : incoming) {
+                if (n.cfp_order__c == null) {
+                    incomingWithoutOrder.add(n);
+                } else {
+                    incomingWithOrder.add(n);
                 }
             }
-        }
+            incomingWithOrder = sortByOrderAsc(incomingWithOrder);
 
-        for (Id functionalProcessId : existingStepsMap.keySet()) {
-            List<cfp_Data_Movements__c> stepsToBeSortedInAFunctionalProcess = existingStepsMap.get(functionalProcessId);
-
-            System.debug('after addition' + stepsToBeSortedInAFunctionalProcess.size());
-            List<cfp_Data_Movements__c> stepsToBeUpdate = stampNewOrderOnStepsAndReturnOnlyThoseNeedingSaving(stepsToBeSortedInAFunctionalProcess, newStepsFromTrigger);
-            listForUpsertion.addAll(stepsToBeUpdate);
-        }
-
-        System.debug('forUpsertion:' + simpleDebug(listForUpsertion));
-        if (listForUpsertion.size() > 0) {
-            List<Database.UpsertResult> upsertResults = Database.upsert(listForUpsertion, true);
-            for (Database.UpsertResult result : upsertResults) {
-                if (result.isSuccess()) {
-                    System.debug('Upserted during insert:' + result.getId());
-                    stepsPreviouslyVisitedDuringTransaction.add(result.getId());
-
+            //Build the merged sequence. Because we're in BEFORE INSERT we mutate
+            //`incoming` records' cfp_order__c directly so the DB write reflects the
+            //renumber without us having to update them ourselves. The existing rows
+            //get collected into `existingNeedingUpdate` and persisted via a guarded
+            //update at the end.
+            List<cfp_Data_Movements__c> merged = new List<cfp_Data_Movements__c>(existing);
+            for (cfp_Data_Movements__c n : incomingWithOrder) {
+                Integer insertIndex = Integer.valueOf(n.cfp_order__c) - 1;
+                if (insertIndex < 0) {
+                    insertIndex = 0;
                 }
+                if (insertIndex > merged.size()) {
+                    insertIndex = merged.size();
+                }
+                merged.add(insertIndex, n);
             }
-            System.debug('afterUpsertion in Insert:' + simpleDebug(listForUpsertion));
+            for (cfp_Data_Movements__c n : incomingWithoutOrder) {
+                merged.add(n);
+            }
+
+            //Renumber 1..N. For incoming records mutate in place; for existing
+            //records only stage an update if the order actually changed.
+            Integer pos = 1;
+            for (cfp_Data_Movements__c step : merged) {
+                if (step.Id == null) {
+                    step.cfp_order__c = pos;
+                } else if (step.cfp_order__c != pos) {
+                    step.cfp_order__c = pos;
+                    existingNeedingUpdate.add(step);
+                }
+                pos++;
+            }
         }
+
+        if (!existingNeedingUpdate.isEmpty()) {
+            isReorderingInProgress = true;
+            try {
+                update existingNeedingUpdate;
+            } finally {
+                isReorderingInProgress = false;
+            }
+            for (cfp_Data_Movements__c s : existingNeedingUpdate) {
+                stepsPreviouslyVisitedDuringTransaction.add(s.Id);
+            }
+        }
+    }
+
+    private static List<cfp_Data_Movements__c> sortByOrderAsc(List<cfp_Data_Movements__c> input) {
+        List<cfp_Data_Movements__c> result = new List<cfp_Data_Movements__c>(input);
+        for (Integer i = 1; i < result.size(); i++) {
+            cfp_Data_Movements__c key = result[i];
+            Integer j = i - 1;
+            while (j >= 0 && result[j].cfp_order__c > key.cfp_order__c) {
+                result[j + 1] = result[j];
+                j--;
+            }
+            result[j + 1] = key;
+        }
+        return result;
     }
 
 
