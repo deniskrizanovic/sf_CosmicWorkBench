@@ -448,6 +448,9 @@
                         <valueListItems>
                             <value>cfp_FunctionalProcess__c.cfp_Create_ReadDisplayPair</value>
                         </valueListItems>
+                        <valueListItems>
+                            <value>cfp_FunctionalProcess__c.cfp_Copy_DMs_from_Process</value>
+                        </valueListItems>
                     </valueList>
                 </componentInstanceProperties>
                 <componentInstanceProperties>
