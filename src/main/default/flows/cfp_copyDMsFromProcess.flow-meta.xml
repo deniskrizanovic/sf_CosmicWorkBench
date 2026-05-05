@@ -113,7 +113,14 @@
             <assignToReference>chosenSourceFP</assignToReference>
             <operator>Assign</operator>
             <value>
-                <elementReference>sourceFP</elementReference>
+                <elementReference>sourceFP_Narrow</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>insertionOrder</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>calcInsertionOrder</elementReference>
             </value>
         </assignmentItems>
         <connector>
@@ -129,13 +136,28 @@
             <assignToReference>chosenSourceFP</assignToReference>
             <operator>Assign</operator>
             <value>
-                <elementReference>sourceFPWidened</elementReference>
+                <elementReference>sourceFP_Wide</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>insertionOrder</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>calcInsertionOrder</elementReference>
             </value>
         </assignmentItems>
         <connector>
             <targetReference>getSourceDMs</targetReference>
         </connector>
     </assignments>
+    <choices>
+        <name>startOfProcessChoice</name>
+        <choiceText>0 - Start of Process</choiceText>
+        <dataType>Number</dataType>
+        <value>
+            <numberValue>0.0</numberValue>
+        </value>
+    </choices>
     <decisions>
         <name>didUserWiden</name>
         <label>didUserWiden</label>
@@ -162,7 +184,7 @@
         </rules>
     </decisions>
     <dynamicChoiceSets>
-        <name>sourceFPChoicesSubSystem</name>
+        <name>sourceFPChoicesAll</name>
         <dataType>String</dataType>
         <displayField>Name</displayField>
         <filterLogic>and</filterLogic>
@@ -171,20 +193,6 @@
             <operator>NotEqualTo</operator>
             <value>
                 <elementReference>recordId</elementReference>
-            </value>
-        </filters>
-        <filters>
-            <field>cfp_System_Context__c</field>
-            <operator>EqualTo</operator>
-            <value>
-                <elementReference>getCurrentFP.cfp_System_Context__c</elementReference>
-            </value>
-        </filters>
-        <filters>
-            <field>cfp_Sub_System__c</field>
-            <operator>EqualTo</operator>
-            <value>
-                <elementReference>getCurrentFP.cfp_Sub_System__c</elementReference>
             </value>
         </filters>
         <object>cfp_FunctionalProcess__c</object>
@@ -216,7 +224,37 @@
         <sortOrder>Asc</sortOrder>
         <valueField>Id</valueField>
     </dynamicChoiceSets>
+    <dynamicChoiceSets>
+        <name>targetDMChoices</name>
+        <dataType>String</dataType>
+        <displayField>cfp_DM_OrderDisplay__c</displayField>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>cfp_FunctionalProcess__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>recordId</elementReference>
+            </value>
+        </filters>
+        <filters>
+            <field>cfp_order__c</field>
+            <operator>LessThan</operator>
+            <value>
+                <numberValue>90.0</numberValue>
+            </value>
+        </filters>
+        <object>cfp_Data_Movements__c</object>
+        <sortField>cfp_order__c</sortField>
+        <sortOrder>Asc</sortOrder>
+        <valueField>cfp_order__c</valueField>
+    </dynamicChoiceSets>
     <environments>Default</environments>
+    <formulas>
+        <name>calcInsertionOrder</name>
+        <dataType>Number</dataType>
+        <expression>{!insertionOrderChoice} + 1</expression>
+        <scale>0</scale>
+    </formulas>
     <interviewLabel>cfp_copyDMsFromProcess {!$Flow.CurrentDateTime}</interviewLabel>
     <label>cfp_copyDMsFromProcess</label>
     <loops>
@@ -326,7 +364,7 @@
         </connector>
         <fields>
             <name>instructionsForPickSource</name>
-            <fieldText>&lt;p&gt;Pick the Functional Process to copy Data Movements from. By default the radio shows processes in the same Sub System and System Context. Tick &quot;Widen Search&quot; if you want to pick a process anywhere in the same System Context (use the second radio).&lt;/p&gt;</fieldText>
+            <fieldText>&lt;p&gt;Pick the Functional Process to copy Data Movements from. By default the list shows processes in the same System Context. Tick &quot;Widen Search&quot; if you want to pick a process from any System Context.&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
         </fields>
         <fields>
@@ -335,34 +373,53 @@
             <defaultValue>
                 <booleanValue>false</booleanValue>
             </defaultValue>
-            <fieldText>Widen Search (any Sub System within same System Context)</fieldText>
+            <fieldText>Widen Search (any System Context)</fieldText>
             <fieldType>InputField</fieldType>
             <isRequired>true</isRequired>
         </fields>
         <fields>
-            <name>sourceFP</name>
-            <choiceReferences>sourceFPChoicesSubSystem</choiceReferences>
-            <dataType>String</dataType>
-            <fieldText>Source Functional Process (same Sub System)</fieldText>
-            <fieldType>RadioButtons</fieldType>
-            <isRequired>false</isRequired>
-        </fields>
-        <fields>
-            <name>sourceFPWidened</name>
+            <name>sourceFP_Narrow</name>
             <choiceReferences>sourceFPChoicesSysContext</choiceReferences>
             <dataType>String</dataType>
-            <fieldText>Source Functional Process (whole System Context, used when Widen Search is ticked)</fieldText>
-            <fieldType>RadioButtons</fieldType>
-            <isRequired>false</isRequired>
+            <fieldText>Source Functional Process</fieldText>
+            <fieldType>DropdownBox</fieldType>
+            <isRequired>true</isRequired>
+            <visibilityRule>
+                <conditionLogic>and</conditionLogic>
+                <conditions>
+                    <leftValueReference>widenSearch</leftValueReference>
+                    <operator>EqualTo</operator>
+                    <rightValue>
+                        <booleanValue>false</booleanValue>
+                    </rightValue>
+                </conditions>
+            </visibilityRule>
         </fields>
         <fields>
-            <name>insertionOrder</name>
+            <name>sourceFP_Wide</name>
+            <choiceReferences>sourceFPChoicesAll</choiceReferences>
+            <dataType>String</dataType>
+            <fieldText>Source Functional Process (All)</fieldText>
+            <fieldType>DropdownBox</fieldType>
+            <isRequired>true</isRequired>
+            <visibilityRule>
+                <conditionLogic>and</conditionLogic>
+                <conditions>
+                    <leftValueReference>widenSearch</leftValueReference>
+                    <operator>EqualTo</operator>
+                    <rightValue>
+                        <booleanValue>true</booleanValue>
+                    </rightValue>
+                </conditions>
+            </visibilityRule>
+        </fields>
+        <fields>
+            <name>insertionOrderChoice</name>
+            <choiceReferences>startOfProcessChoice</choiceReferences>
+            <choiceReferences>targetDMChoices</choiceReferences>
             <dataType>Number</dataType>
-            <defaultValue>
-                <numberValue>1.0</numberValue>
-            </defaultValue>
-            <fieldText>Insertion Order (where the cloned Data Movements will start; existing rows shift down)</fieldText>
-            <fieldType>InputField</fieldType>
+            <fieldText>Insert After which Data Movement?</fieldText>
+            <fieldType>DropdownBox</fieldType>
             <isRequired>true</isRequired>
             <scale>0</scale>
         </fields>
@@ -499,6 +556,14 @@
         <isCollection>false</isCollection>
         <isInput>false</isInput>
         <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>insertionOrder</name>
+        <dataType>Number</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <scale>0</scale>
     </variables>
     <variables>
         <name>nextOrder</name>
