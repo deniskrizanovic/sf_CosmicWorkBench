@@ -226,7 +226,7 @@
     </dynamicChoiceSets>
     <dynamicChoiceSets>
         <name>targetDMChoices</name>
-        <dataType>String</dataType>
+        <dataType>Number</dataType>
         <displayField>cfp_DM_OrderDisplay__c</displayField>
         <filterLogic>and</filterLogic>
         <filters>
