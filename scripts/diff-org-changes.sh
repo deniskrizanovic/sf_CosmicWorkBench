@@ -10,7 +10,7 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 REPO_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
 TARGET_ORG="${1:-home-denispoc}"
 FILE_PATH="${2:-}"
-TMP_DIR="$REPO_ROOT/.tmp-org-retrieve"
+TMP_DIR="/tmp/sf-diff-org-retrieve-$$"
 
 cleanup() {
   rm -rf "$TMP_DIR"
@@ -18,19 +18,37 @@ cleanup() {
 trap cleanup EXIT
 
 cd "$REPO_ROOT"
-mkdir -p "$TMP_DIR"
+mkdir -p "$TMP_DIR/main/default"
+
+# sf project retrieve ignores --output-dir; it always writes to the default package dir.
+# Work around this by running retrieve from inside a self-contained temp project whose
+# default package dir is TMP_DIR itself.
+TMP_PROJECT_DIR="$TMP_DIR/_project"
+mkdir -p "$TMP_PROJECT_DIR"
+cat > "$TMP_PROJECT_DIR/sfdx-project.json" <<EOF
+{
+  "packageDirectories": [{ "path": "retrieve-out", "default": true }],
+  "sourceApiVersion": "66.0"
+}
+EOF
+mkdir -p "$TMP_PROJECT_DIR/retrieve-out"
 
 # Generate manifest from local source (covers all metadata in the project)
-sf project generate manifest --source-dir src --name diff-package --output-dir "$TMP_DIR"
+sf project generate manifest --source-dir "$REPO_ROOT/src" --name diff-package --output-dir "$TMP_DIR"
 
 # Rewrite Flow members to use active version numbers (avoids retrieving wrong/draft version)
 python3 "$SCRIPT_DIR/ensure-active-flow-versions.py" "$TMP_DIR/diff-package.xml" --org "$TARGET_ORG"
 
-# Retrieve from org (output must be inside project)
+# Retrieve from org into the temp project (CLI writes to its default package dir)
+cd "$TMP_PROJECT_DIR"
 sf project retrieve start \
   --target-org "$TARGET_ORG" \
-  --manifest "$TMP_DIR/diff-package.xml" \
-  --output-dir "$TMP_DIR"
+  --manifest "$TMP_DIR/diff-package.xml"
+cd "$REPO_ROOT"
+
+# Move retrieved files up to TMP_DIR for diffing (CLI writes to retrieve-out/main/default/)
+rsync -a "$TMP_PROJECT_DIR/retrieve-out/main/default/" "$TMP_DIR/main/default/"
+rm -rf "$TMP_PROJECT_DIR"
 
 # Diff: retrieve puts files in TMP_DIR/{type}/, local uses src/main/default/{type}/
 rm -f "$TMP_DIR/diff-package.xml"
@@ -38,17 +56,60 @@ echo "=== Differences (org vs local) ==="
 echo "Left: org ($TARGET_ORG)  |  Right: local (src/main/default/)"
 echo ""
 
+ORG_RETRIEVE_DIR="$TMP_DIR/main/default"
+
+# Normalise flow files before diffing:
+#   - strips locationX/locationY (canvas positions, cosmetic)
+#   - strips <status> (runtime activation state)
+#   - sorts top-level named elements for stable ordering
+ORG_FLOWS_NORM="$TMP_DIR/org-flows-norm"
+LOCAL_FLOWS_NORM="$TMP_DIR/local-flows-norm"
+mkdir -p "$ORG_FLOWS_NORM" "$LOCAL_FLOWS_NORM"
+
+for f in "$ORG_RETRIEVE_DIR"/flows/*.flow-meta.xml; do
+  [[ -f "$f" ]] && python3 "$SCRIPT_DIR/normalise-flow.py" "$f" > "$ORG_FLOWS_NORM/$(basename "$f")" 2>/dev/null
+done
+for f in src/main/default/flows/*.flow-meta.xml; do
+  [[ -f "$f" ]] && python3 "$SCRIPT_DIR/normalise-flow.py" "$f" > "$LOCAL_FLOWS_NORM/$(basename "$f")" 2>/dev/null
+done
+
+# Normalise Apex files before diffing: org omits trailing newline, local has one.
+# Copy both sides with a guaranteed trailing newline so EOF whitespace never shows as a diff.
+ORG_APEX_NORM="$TMP_DIR/org-apex-norm"
+LOCAL_APEX_NORM="$TMP_DIR/local-apex-norm"
+mkdir -p "$ORG_APEX_NORM" "$LOCAL_APEX_NORM"
+
+for f in "$ORG_RETRIEVE_DIR"/classes/*.cls "$ORG_RETRIEVE_DIR"/classes/*.cls-meta.xml \
+         "$ORG_RETRIEVE_DIR"/triggers/*.trigger "$ORG_RETRIEVE_DIR"/triggers/*.trigger-meta.xml; do
+  [[ -f "$f" ]] && { sed -e '$a\' "$f" > "$ORG_APEX_NORM/$(basename "$f")"; }
+done
+for f in src/main/default/classes/*.cls src/main/default/classes/*.cls-meta.xml \
+         src/main/default/triggers/*.trigger src/main/default/triggers/*.trigger-meta.xml; do
+  [[ -f "$f" ]] && { sed -e '$a\' "$f" > "$LOCAL_APEX_NORM/$(basename "$f")"; }
+done
+
 if [[ -n "$FILE_PATH" ]]; then
-  # Normalize: strip src/main/default/ prefix if present
   REL_PATH="${FILE_PATH#src/main/default/}"
-  ORG_FILE="$TMP_DIR/$REL_PATH"
+  ORG_FILE="$ORG_RETRIEVE_DIR/$REL_PATH"
   LOCAL_FILE="src/main/default/$REL_PATH"
   if [[ -f "$ORG_FILE" && -f "$LOCAL_FILE" ]]; then
-    diff "$ORG_FILE" "$LOCAL_FILE" || true
+    if [[ "$REL_PATH" == flows/* ]]; then
+      FNAME="$(basename "$REL_PATH")"
+      diff "$ORG_FLOWS_NORM/$FNAME" "$LOCAL_FLOWS_NORM/$FNAME" || true
+    elif [[ "$REL_PATH" == classes/* || "$REL_PATH" == triggers/* ]]; then
+      FNAME="$(basename "$REL_PATH")"
+      diff "$ORG_APEX_NORM/$FNAME" "$LOCAL_APEX_NORM/$FNAME" || true
+    else
+      diff "$ORG_FILE" "$LOCAL_FILE" || true
+    fi
   else
     echo "File not found. Org: $ORG_FILE | Local: $LOCAL_FILE"
     exit 1
   fi
 else
-  diff -rq "$TMP_DIR" src/main/default || true
+  diff -rq "$ORG_RETRIEVE_DIR" src/main/default \
+    --exclude="*.flow-meta.xml" --exclude="*.cls" --exclude="*.cls-meta.xml" \
+    --exclude="*.trigger" --exclude="*.trigger-meta.xml" || true
+  diff -rq "$ORG_FLOWS_NORM" "$LOCAL_FLOWS_NORM" 2>/dev/null || true
+  diff -rq "$ORG_APEX_NORM" "$LOCAL_APEX_NORM" 2>/dev/null || true
 fi
