@@ -399,7 +399,7 @@
             <isRequired>true</isRequired>
             <outputParameters>
                 <assignToReference>selectedSCIdVar</assignToReference>
-                <name>value</name>
+                <name>recordId</name>
             </outputParameters>
         </fields>
         <showFooter>true</showFooter>
