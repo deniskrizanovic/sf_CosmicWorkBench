@@ -5,5 +5,8 @@
       "default": true
     }
   ],
+  "name": "sf_CosmicWorkBench",
+  "namespace": "",
+  "sfdcLoginUrl": "https://nsw06--denispoc.sandbox.my.salesforce.com/",
   "sourceApiVersion": "66.0"
 }
