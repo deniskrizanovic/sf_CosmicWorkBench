@@ -1,6 +1,7 @@
 .sf/
 .sfdx/
 .localdev/
+.localdevserver/
 /IlluminatedCloud/
 /out/
 target/
@@ -72,6 +73,12 @@ src/main/default/applications/*
 !.cursor/rules/
 .DS_Store
 github_setup_guide.md
+GITHUB_SETUP_GUIDE.md
+
+# Claude / MCP local config
+.claude/settings.json
+.claude/settings.local.json
+.mcp.json
 
 # diff-org-changes.sh working dir
 .tmp-org-retrieve/
@@ -81,3 +88,14 @@ data/_all/logs/
 data/_all/reports/
 data/_all/source/
 data/_all/target/
+
+# Misc
+deploy-options.json
+coverage/
+*.log
+.pmdCache
+.eslintcache
+.env
+**/__pycache__/
+**/.venv/
+**/venv/
