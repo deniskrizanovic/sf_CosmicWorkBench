@@ -427,6 +427,39 @@ private class cfp_DataMovementsOrderingTest {
 
 
     @IsTest
+    static void testInsertAtExactlyEndOfExistingList_shouldNotCrash() {
+        cfp_FunctionalProcess__c fp = [SELECT Id FROM cfp_FunctionalProcess__c WHERE Name = 'Test FP' LIMIT 1];
+
+        List<cfp_Data_Movements__c> existing = [
+            SELECT Id, cfp_order__c FROM cfp_Data_Movements__c
+            WHERE cfp_FunctionalProcess__c = :fp.Id AND cfp_order__c < 90
+        ];
+        Integer existingCount = existing.size();
+
+        cfp_Data_Movements__c appendStep = new cfp_Data_Movements__c(
+            cfp_FunctionalProcess__c = fp.Id,
+            Name = 'Appended Step',
+            cfp_implementationtype__c = 'Apex',
+            cfp_order__c = existingCount + 1
+        );
+
+        Test.startTest();
+        insert appendStep;
+        Test.stopTest();
+
+        List<cfp_Data_Movements__c> after = [
+            SELECT cfp_order__c FROM cfp_Data_Movements__c
+            WHERE cfp_FunctionalProcess__c = :fp.Id AND cfp_order__c < 90
+            ORDER BY cfp_order__c ASC
+        ];
+        Assert.areEqual(existingCount + 1, after.size(), 'step count should increase by 1');
+        for (Integer i = 0; i < after.size(); i++) {
+            Assert.areEqual((Decimal)(i + 1), after[i].cfp_order__c,
+                'orders should be contiguous at position ' + (i + 1));
+        }
+    }
+
+    @IsTest
     static void testChangingTheOrderWithAnUpdateByMovingAStepDownTheOrder() {
 
         cfp_FunctionalProcess__c fp = [SELECT Id, Name, cfp_Total_Function_Points__c FROM cfp_FunctionalProcess__c WHERE Name = 'Test FP' limit 1];
