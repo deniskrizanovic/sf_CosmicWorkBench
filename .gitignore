@@ -80,6 +80,11 @@ GITHUB_SETUP_GUIDE.md
 .claude/settings.local.json
 .mcp.json
 
+# Claude rules are project artefacts — commit them
+# (settings files above are still ignored)
+.claude/*
+!.claude/rules/
+
 # diff-org-changes.sh working dir
 .tmp-org-retrieve/
 
