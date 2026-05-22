@@ -155,6 +155,11 @@
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
+        <editable>true</editable>
+        <field>cfp_FunctionalProcess__c.cfp_Reused_from_Functional_Process__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
         <editable>false</editable>
         <field>cfp_FunctionalProcess__c.cfp_Estimated_Size__c</field>
         <readable>true</readable>
