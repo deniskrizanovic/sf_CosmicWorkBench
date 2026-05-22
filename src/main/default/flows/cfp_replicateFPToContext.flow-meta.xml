@@ -150,7 +150,7 @@
             <field>cfp_System_Context__c</field>
             <operator>EqualTo</operator>
             <value>
-                <elementReference>selectedSCId</elementReference>
+                <elementReference>selectedSCIdVar</elementReference>
             </value>
         </filters>
         <object>cfp_FunctionalProcess__c</object>
@@ -398,7 +398,7 @@
             </inputParameters>
             <isRequired>true</isRequired>
             <outputParameters>
-                <assignToReference>selectedSCId</assignToReference>
+                <assignToReference>selectedSCIdVar</assignToReference>
                 <name>value</name>
             </outputParameters>
         </fields>
@@ -467,7 +467,7 @@
         <isOutput>false</isOutput>
     </variables>
     <variables>
-        <name>selectedSCId</name>
+        <name>selectedSCIdVar</name>
         <dataType>String</dataType>
         <isCollection>false</isCollection>
         <isInput>false</isInput>
