@@ -35,6 +35,7 @@ src/main/default/flows/*
 !src/main/default/flexipages/
 src/main/default/flexipages/*
 !src/main/default/flexipages/cfp_*
+!src/main/default/flexipages/System_Context_Record_Page.flexipage-meta.xml
 !src/main/default/layouts/
 src/main/default/layouts/*
 !src/main/default/layouts/cfp_*
