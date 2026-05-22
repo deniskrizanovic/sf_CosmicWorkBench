@@ -5,8 +5,8 @@
     <assignments>
         <name>Assign_Read_List_record</name>
         <label>Read List of {DataGroup}</label>
-        <locationX>50</locationX>
-        <locationY>1082</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>singleDataMovement.Name</assignToReference>
             <operator>Assign</operator>
@@ -56,8 +56,8 @@
     <assignments>
         <name>assignToTextToken</name>
         <label>assignToTextToken</label>
-        <locationX>270</locationX>
-        <locationY>566</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>relatedListsTextForDisplay</assignToReference>
             <operator>Add</operator>
@@ -79,8 +79,8 @@
     <assignments>
         <name>AssignWorkingObjectVariables</name>
         <label>AssignWorkingObjectVariables</label>
-        <locationX>182</locationX>
-        <locationY>866</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>currentObjectBeingWorkedOn</assignToReference>
             <operator>Assign</operator>
@@ -95,8 +95,8 @@
     <assignments>
         <name>AssignWorkingObjectVariablesForEeachDataGroup</name>
         <label>AssignWorkingObjectVariablesForEeachDataGroup</label>
-        <locationX>270</locationX>
-        <locationY>2630</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>currentObjectBeingWorkedOn</assignToReference>
             <operator>Assign</operator>
@@ -111,8 +111,8 @@
     <assignments>
         <name>Click_Specific_Object</name>
         <label>Click Specific {DataGroup}</label>
-        <locationX>50</locationX>
-        <locationY>1298</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>singleDataMovement.Name</assignToReference>
             <operator>Assign</operator>
@@ -162,8 +162,8 @@
     <assignments>
         <name>Copy_1_of_Display_path_details_for_DataGroup</name>
         <label>Display Highlights Panel {DataGroup}</label>
-        <locationX>50</locationX>
-        <locationY>2330</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>singleDataMovement.Name</assignToReference>
             <operator>Assign</operator>
@@ -213,8 +213,8 @@
     <assignments>
         <name>Display_DataGroup_Details</name>
         <label>Display {DataGroup} Details</label>
-        <locationX>182</locationX>
-        <locationY>1598</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>singleDataMovement.Name</assignToReference>
             <operator>Assign</operator>
@@ -264,8 +264,8 @@
     <assignments>
         <name>Display_List_of_Object</name>
         <label>Display List of {DataGroup}</label>
-        <locationX>50</locationX>
-        <locationY>1190</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>singleDataMovement.Name</assignToReference>
             <operator>Assign</operator>
@@ -315,8 +315,8 @@
     <assignments>
         <name>Display_path_details_for_DataGroup</name>
         <label>Display path details for {DataGroup}</label>
-        <locationX>50</locationX>
-        <locationY>1922</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>singleDataMovement.Name</assignToReference>
             <operator>Assign</operator>
@@ -366,8 +366,8 @@
     <assignments>
         <name>Display_Related_DataGroupList</name>
         <label>Display Related {DataGroupList}</label>
-        <locationX>270</locationX>
-        <locationY>2846</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>singleDataMovement.Name</assignToReference>
             <operator>Assign</operator>
@@ -417,8 +417,8 @@
     <assignments>
         <name>Read_DataGroup_Details</name>
         <label>Read {DataGroup} Details</label>
-        <locationX>182</locationX>
-        <locationY>1490</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>singleDataMovement.Name</assignToReference>
             <operator>Assign</operator>
@@ -468,8 +468,8 @@
     <assignments>
         <name>Read_Highlights_Panel_DataGroup</name>
         <label>Read Highlights Panel {DataGroup}</label>
-        <locationX>50</locationX>
-        <locationY>2222</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>singleDataMovement.Name</assignToReference>
             <operator>Assign</operator>
@@ -519,8 +519,8 @@
     <assignments>
         <name>Read_path_details_for_DataGroup</name>
         <label>Read path details for {DataGroup}</label>
-        <locationX>50</locationX>
-        <locationY>1814</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>singleDataMovement.Name</assignToReference>
             <operator>Assign</operator>
@@ -570,8 +570,8 @@
     <assignments>
         <name>Read_Related_DataGroupList</name>
         <label>Read Related {DataGroupList}</label>
-        <locationX>270</locationX>
-        <locationY>2738</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>singleDataMovement.Name</assignToReference>
             <operator>Assign</operator>
@@ -628,8 +628,8 @@
     <decisions>
         <name>Add_Highlights_PanelDecision</name>
         <label>Add Highlights Panel</label>
-        <locationX>182</locationX>
-        <locationY>2114</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <defaultConnector>
             <targetReference>selectedRelatedLists</targetReference>
         </defaultConnector>
@@ -653,8 +653,8 @@
     <decisions>
         <name>AddPath</name>
         <label>AddPath</label>
-        <locationX>182</locationX>
-        <locationY>1706</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <defaultConnector>
             <targetReference>Add_Highlights_PanelDecision</targetReference>
         </defaultConnector>
@@ -678,8 +678,8 @@
     <decisions>
         <name>Include_ListView_For_Hero_Object</name>
         <label>Include ListView For Hero Object</label>
-        <locationX>182</locationX>
-        <locationY>974</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <defaultConnector>
             <targetReference>Read_DataGroup_Details</targetReference>
         </defaultConnector>
@@ -706,8 +706,8 @@
     <loops>
         <name>createRelatedListTextBox</name>
         <label>createRelatedListTextBox</label>
-        <locationX>182</locationX>
-        <locationY>458</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <collectionReference>relatedListsDatatable.selectedRows</collectionReference>
         <iterationOrder>Asc</iterationOrder>
         <nextValueConnector>
@@ -720,8 +720,8 @@
     <loops>
         <name>selectedRelatedLists</name>
         <label>selectedRelatedLists</label>
-        <locationX>182</locationX>
-        <locationY>2522</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <collectionReference>relatedListsDatatable.selectedRows</collectionReference>
         <iterationOrder>Asc</iterationOrder>
         <nextValueConnector>
@@ -753,15 +753,15 @@
     <recordCreates>
         <name>createDMs</name>
         <label>createDMs</label>
-        <locationX>182</locationX>
-        <locationY>3038</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <inputReference>DMsToInsert</inputReference>
     </recordCreates>
     <recordLookups>
         <name>getDatagroups</name>
         <label>getDatagroups</label>
-        <locationX>182</locationX>
-        <locationY>242</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Which_DataGroup</targetReference>
@@ -783,8 +783,8 @@
     <recordLookups>
         <name>getFunctionalProcess</name>
         <label>getFunctionalProcess</label>
-        <locationX>182</locationX>
-        <locationY>134</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>getDatagroups</targetReference>
@@ -804,8 +804,8 @@
     <screens>
         <name>confirmSelections</name>
         <label>confirmSelections</label>
-        <locationX>182</locationX>
-        <locationY>758</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>true</allowPause>
@@ -831,8 +831,8 @@
     <screens>
         <name>Which_DataGroup</name>
         <label>Which DataGroup</label>
-        <locationX>182</locationX>
-        <locationY>350</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>true</allowPause>
@@ -932,7 +932,6 @@
                     <fieldText>Include ListView of Hero Object</fieldText>
                     <fieldType>InputField</fieldType>
                     <helpText>&lt;p&gt;If you want to start at a listview before getting to the main detail page, select this.&lt;/p&gt;</helpText>
-                    <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
                     <isRequired>true</isRequired>
                     <styleProperties>
                         <verticalAlignment>
@@ -948,7 +947,6 @@
                     <dataType>Boolean</dataType>
                     <fieldText>Add Highlights Panel</fieldText>
                     <fieldType>InputField</fieldType>
-                    <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
                     <isRequired>true</isRequired>
                     <styleProperties>
                         <verticalAlignment>
@@ -964,7 +962,6 @@
                     <dataType>Boolean</dataType>
                     <fieldText>Add Path</fieldText>
                     <fieldType>InputField</fieldType>
-                    <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
                     <isRequired>true</isRequired>
                     <styleProperties>
                         <verticalAlignment>
@@ -1098,7 +1095,7 @@
         <showHeader>false</showHeader>
     </screens>
     <start>
-        <locationX>56</locationX>
+        <locationX>0</locationX>
         <locationY>0</locationY>
         <connector>
             <targetReference>getFunctionalProcess</targetReference>

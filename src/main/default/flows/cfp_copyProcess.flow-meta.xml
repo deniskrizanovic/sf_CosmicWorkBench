@@ -5,8 +5,8 @@
     <assignments>
         <name>Assign_To_TextVar</name>
         <label>Assign To TextVar</label>
-        <locationX>264</locationX>
-        <locationY>890</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>IDsOfDMs</assignToReference>
             <operator>Add</operator>
@@ -28,8 +28,8 @@
     <assignments>
         <name>createDMIdList</name>
         <label>createDMIdList</label>
-        <locationX>264</locationX>
-        <locationY>782</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>DMsForInsertRecords.Name</assignToReference>
             <operator>Assign</operator>
@@ -72,8 +72,8 @@
     <assignments>
         <name>setId</name>
         <label>setId</label>
-        <locationX>264</locationX>
-        <locationY>1298</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>DMsForInsertRecords.Name</assignToReference>
             <operator>Assign</operator>
@@ -168,8 +168,8 @@
     <loops>
         <name>Select_DM_IDs</name>
         <label>Select DM IDs</label>
-        <locationX>176</locationX>
-        <locationY>674</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <collectionReference>advanced</collectionReference>
         <iterationOrder>Asc</iterationOrder>
         <nextValueConnector>
@@ -182,8 +182,8 @@
     <loops>
         <name>SetFunctionalProcessInAllDMsToInsert</name>
         <label>SetFunctionalProcessInAllDMsToInsert</label>
-        <locationX>176</locationX>
-        <locationY>1190</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <collectionReference>DMSToInsert</collectionReference>
         <iterationOrder>Asc</iterationOrder>
         <nextValueConnector>
@@ -215,8 +215,8 @@
     <recordCreates>
         <name>createNewDataMovements</name>
         <label>createNewDataMovements</label>
-        <locationX>176</locationX>
-        <locationY>1490</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <connector>
             <targetReference>successeed</targetReference>
         </connector>
@@ -225,8 +225,8 @@
     <recordCreates>
         <name>createNewFunctionalProcess</name>
         <label>createNewFunctionalProcess</label>
-        <locationX>176</locationX>
-        <locationY>1082</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <connector>
             <targetReference>SetFunctionalProcessInAllDMsToInsert</targetReference>
         </connector>
@@ -248,8 +248,8 @@
     <recordLookups>
         <name>getSteps4</name>
         <label>getSteps4</label>
-        <locationX>176</locationX>
-        <locationY>458</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Choose_Data_Movements</targetReference>
@@ -285,8 +285,8 @@
     <recordLookups>
         <name>getSystemContext</name>
         <label>getSystemContext</label>
-        <locationX>176</locationX>
-        <locationY>134</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>copyProcess</targetReference>
@@ -298,8 +298,8 @@
     <screens>
         <name>Choose_Data_Movements</name>
         <label>Choose Data Movements</label>
-        <locationX>176</locationX>
-        <locationY>566</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>true</allowPause>
@@ -384,8 +384,8 @@
     <screens>
         <name>copyProcess</name>
         <label>copyProcess</label>
-        <locationX>176</locationX>
-        <locationY>242</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>true</allowPause>
@@ -397,7 +397,6 @@
             <dataType>String</dataType>
             <fieldText>Name Your New Functional Process</fieldText>
             <fieldType>InputField</fieldType>
-            <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
             <isRequired>true</isRequired>
             <styleProperties>
                 <verticalAlignment>
@@ -482,8 +481,8 @@
     <screens>
         <name>selectFunctionalProcess</name>
         <label>selectFunctionalProcess</label>
-        <locationX>176</locationX>
-        <locationY>350</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>true</allowPause>
@@ -496,7 +495,6 @@
             <dataType>String</dataType>
             <fieldText>Choose Functional Process</fieldText>
             <fieldType>RadioButtons</fieldType>
-            <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
             <isRequired>true</isRequired>
             <styleProperties>
                 <verticalAlignment>
@@ -513,8 +511,8 @@
     <screens>
         <name>successeed</name>
         <label>successeed</label>
-        <locationX>176</locationX>
-        <locationY>1598</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <allowBack>false</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>false</allowPause>
@@ -536,7 +534,7 @@
         <showHeader>false</showHeader>
     </screens>
     <start>
-        <locationX>50</locationX>
+        <locationX>0</locationX>
         <locationY>0</locationY>
         <connector>
             <targetReference>getSystemContext</targetReference>
