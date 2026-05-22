@@ -211,16 +211,6 @@
             <fieldInstance>
                 <fieldInstanceProperties>
                     <name>uiBehavior</name>
-                    <value>none</value>
-                </fieldInstanceProperties>
-                <fieldItem>Record.cfp_is_reUsed__c</fieldItem>
-                <identifier>Recordcfp_is_reUsed_cField</identifier>
-            </fieldInstance>
-        </itemInstances>
-        <itemInstances>
-            <fieldInstance>
-                <fieldInstanceProperties>
-                    <name>uiBehavior</name>
                     <value>readonly</value>
                 </fieldInstanceProperties>
                 <fieldItem>Record.cfp_Implemenation_Category__c</fieldItem>
