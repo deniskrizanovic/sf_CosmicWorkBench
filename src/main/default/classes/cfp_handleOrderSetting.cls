@@ -246,10 +246,11 @@ public with sharing class cfp_handleOrderSetting {
                 if (insertIndex < 0) {
                     insertIndex = 0;
                 }
-                if (insertIndex > merged.size()) {
-                    insertIndex = merged.size();
+                if (insertIndex >= merged.size()) {
+                    merged.add(n);
+                } else {
+                    merged.add(insertIndex, n);
                 }
-                merged.add(insertIndex, n);
             }
             for (cfp_Data_Movements__c n : incomingWithoutOrder) {
                 merged.add(n);
