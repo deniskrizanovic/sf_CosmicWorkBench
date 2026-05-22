@@ -13,7 +13,9 @@ FILE_PATH="${2:-}"
 TMP_DIR="/tmp/sf-diff-org-retrieve-$$"
 
 cleanup() {
-  rm -rf "$TMP_DIR"
+  if [[ -z "${KEEP_DIFF_TMP:-}" ]]; then
+    rm -rf "$TMP_DIR"
+  fi
 }
 trap cleanup EXIT
 
@@ -88,6 +90,42 @@ for f in src/main/default/classes/*.cls src/main/default/classes/*.cls-meta.xml 
   [[ -f "$f" ]] && { sed -e '$a\' "$f" > "$LOCAL_APEX_NORM/$(basename "$f")"; }
 done
 
+# Normalise dashboard files before diffing: strip <owner> and <runningUser> (user-specific, runtime-set)
+ORG_DASH_NORM="$TMP_DIR/org-dash-norm"
+LOCAL_DASH_NORM="$TMP_DIR/local-dash-norm"
+mkdir -p "$ORG_DASH_NORM" "$LOCAL_DASH_NORM"
+
+for f in "$ORG_RETRIEVE_DIR"/dashboards/**/*.dashboard-meta.xml; do
+  [[ -f "$f" ]] && grep -v '<owner>' "$f" | grep -v '<runningUser>' > "$ORG_DASH_NORM/$(basename "$f")"
+done
+for f in src/main/default/dashboards/**/*.dashboard-meta.xml; do
+  [[ -f "$f" ]] && grep -v '<owner>' "$f" | grep -v '<runningUser>' > "$LOCAL_DASH_NORM/$(basename "$f")"
+done
+
+# Normalise field XML before diffing: decode &quot; -> " (org serialises quotes as XML entity; local uses literals — functionally identical)
+ORG_FIELD_NORM="$TMP_DIR/org-field-norm"
+LOCAL_FIELD_NORM="$TMP_DIR/local-field-norm"
+mkdir -p "$ORG_FIELD_NORM" "$LOCAL_FIELD_NORM"
+
+while IFS= read -r -d '' f; do
+  sed 's/&quot;/"/g' "$f" > "$ORG_FIELD_NORM/$(basename "$f")"
+done < <(find "$ORG_RETRIEVE_DIR/objects" -name "*.field-meta.xml" -print0 2>/dev/null)
+while IFS= read -r -d '' f; do
+  sed 's/&quot;/"/g' "$f" > "$LOCAL_FIELD_NORM/$(basename "$f")"
+done < <(find src/main/default/objects -name "*.field-meta.xml" -print0 2>/dev/null)
+
+# Normalise object metadata before diffing: strip <recordTypeTrackHistory> (auto-injected by platform, not meaningful in source)
+ORG_OBJ_NORM="$TMP_DIR/org-obj-norm"
+LOCAL_OBJ_NORM="$TMP_DIR/local-obj-norm"
+mkdir -p "$ORG_OBJ_NORM" "$LOCAL_OBJ_NORM"
+
+while IFS= read -r -d '' f; do
+  grep -v '<recordTypeTrackHistory>' "$f" > "$ORG_OBJ_NORM/$(basename "$f")"
+done < <(find "$ORG_RETRIEVE_DIR/objects" -name "*.object-meta.xml" -print0 2>/dev/null)
+while IFS= read -r -d '' f; do
+  grep -v '<recordTypeTrackHistory>' "$f" > "$LOCAL_OBJ_NORM/$(basename "$f")"
+done < <(find src/main/default/objects -name "*.object-meta.xml" -print0 2>/dev/null)
+
 if [[ -n "$FILE_PATH" ]]; then
   REL_PATH="${FILE_PATH#src/main/default/}"
   ORG_FILE="$ORG_RETRIEVE_DIR/$REL_PATH"
@@ -99,6 +137,15 @@ if [[ -n "$FILE_PATH" ]]; then
     elif [[ "$REL_PATH" == classes/* || "$REL_PATH" == triggers/* ]]; then
       FNAME="$(basename "$REL_PATH")"
       diff "$ORG_APEX_NORM/$FNAME" "$LOCAL_APEX_NORM/$FNAME" || true
+    elif [[ "$REL_PATH" == dashboards/* ]]; then
+      FNAME="$(basename "$REL_PATH")"
+      diff "$ORG_DASH_NORM/$FNAME" "$LOCAL_DASH_NORM/$FNAME" || true
+    elif [[ "$REL_PATH" == objects/*.object-meta.xml || "$REL_PATH" == objects/*/*.object-meta.xml ]]; then
+      FNAME="$(basename "$REL_PATH")"
+      diff "$ORG_OBJ_NORM/$FNAME" "$LOCAL_OBJ_NORM/$FNAME" || true
+    elif [[ "$REL_PATH" == objects/*/fields/*.field-meta.xml ]]; then
+      FNAME="$(basename "$REL_PATH")"
+      diff "$ORG_FIELD_NORM/$FNAME" "$LOCAL_FIELD_NORM/$FNAME" || true
     else
       diff "$ORG_FILE" "$LOCAL_FILE" || true
     fi
@@ -109,7 +156,13 @@ if [[ -n "$FILE_PATH" ]]; then
 else
   diff -rq "$ORG_RETRIEVE_DIR" src/main/default \
     --exclude="*.flow-meta.xml" --exclude="*.cls" --exclude="*.cls-meta.xml" \
-    --exclude="*.trigger" --exclude="*.trigger-meta.xml" || true
+    --exclude="*.trigger" --exclude="*.trigger-meta.xml" \
+    --exclude="*.dashboard-meta.xml" --exclude="*.object-meta.xml" \
+    --exclude="*.field-meta.xml" --exclude=".DS_Store" \
+    --exclude="jsconfig.json" --exclude="tsconfig.json" --exclude="tsconfig.*.json" || true
   diff -rq "$ORG_FLOWS_NORM" "$LOCAL_FLOWS_NORM" 2>/dev/null || true
   diff -rq "$ORG_APEX_NORM" "$LOCAL_APEX_NORM" 2>/dev/null || true
+  diff -rq "$ORG_DASH_NORM" "$LOCAL_DASH_NORM" 2>/dev/null || true
+  diff -rq "$ORG_OBJ_NORM" "$LOCAL_OBJ_NORM" 2>/dev/null || true
+  diff -rq "$ORG_FIELD_NORM" "$LOCAL_FIELD_NORM" 2>/dev/null || true
 fi
