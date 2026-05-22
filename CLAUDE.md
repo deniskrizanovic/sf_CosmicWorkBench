@@ -55,9 +55,9 @@ Never write metadata without a loaded skill. Never skip MCP attempt.
 
 | Script | Usage |
 |--------|-------|
-| `scripts/diff-org-changes.sh <alias> [file]` | Diff org vs local. File relative to `src/main/default/` |
-| `scripts/export-data.sh` | Export data |
-| `scripts/import-data.sh` | Import data |
+| `scripts/diff/diff-org-changes.sh <alias> [file]` | Diff org vs local. File relative to `src/main/default/` |
+| `scripts/data/export-data.sh` | Export data |
+| `scripts/data/import-data.sh` | Import data |
 
 ## Diff Output Format
 
@@ -80,7 +80,8 @@ Pre-commit hooks run prettier + eslint + jest (via lint-staged + husky).
 
 - `force-app/` — default package source
 - `src/main/default/` — retrieved/deployed metadata
-- `scripts/` — utility shell/python scripts
+- `scripts/diff/` — org vs local diff toolchain
+- `scripts/data/` — data export/import/prep + Apex data ops
 - `.cursor/rules/` — Cursor rules (caveman, git-workflow, plans)
 - `.cursor/skills/` — skill definitions (caveman, diff-org-changes)
 - `.cursor/plans/` — implementation plans

@@ -7,7 +7,7 @@
 set -e
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-REPO_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
+REPO_ROOT="$(cd "$SCRIPT_DIR/../.." && pwd)"
 TARGET_ORG="${1:-home-denispoc}"
 FILE_PATH="${2:-}"
 TMP_DIR="/tmp/sf-diff-org-retrieve-$$"
@@ -54,6 +54,13 @@ rm -rf "$TMP_PROJECT_DIR"
 
 # Diff: retrieve puts files in TMP_DIR/{type}/, local uses src/main/default/{type}/
 rm -f "$TMP_DIR/diff-package.xml"
+echo "=== Normalisation (stripped before diff — not real differences) ==="
+echo "  Flows        : locationX/locationY (canvas positions) | <status> (activation state) | element order"
+echo "  Apex/Triggers: trailing newline (org omits, local adds)"
+echo "  Dashboards   : <owner> | <runningUser> (runtime, user-specific)"
+echo "  Fields       : &quot; → \" (XML entity vs literal — functionally identical)"
+echo "  Objects      : <recordTypeTrackHistory> (platform-injected, absent from source)"
+echo ""
 echo "=== Differences (org vs local) ==="
 echo "Left: org ($TARGET_ORG)  |  Right: local (src/main/default/)"
 echo ""
