@@ -141,23 +141,6 @@
             <label>Has DMs</label>
         </rules>
     </decisions>
-    <dynamicChoiceSets>
-        <name>filteredFPChoices</name>
-        <dataType>String</dataType>
-        <displayField>Name</displayField>
-        <filterLogic>and</filterLogic>
-        <filters>
-            <field>cfp_System_Context__c</field>
-            <operator>EqualTo</operator>
-            <value>
-                <elementReference>selectedSCIdVar</elementReference>
-            </value>
-        </filters>
-        <object>cfp_FunctionalProcess__c</object>
-        <sortField>Name</sortField>
-        <sortOrder>Asc</sortOrder>
-        <valueField>Id</valueField>
-    </dynamicChoiceSets>
     <environments>Default</environments>
     <interviewLabel>cfp_replicateFPToContext {!$Flow.CurrentDateTime}</interviewLabel>
     <label>cfp_replicateFPToContext</label>
@@ -271,7 +254,7 @@
             <field>cfp_FunctionalProcess__c</field>
             <operator>EqualTo</operator>
             <value>
-                <elementReference>sourceFPChoice</elementReference>
+                <elementReference>sourceFPIdVar</elementReference>
             </value>
         </filters>
         <getFirstRecordOnly>false</getFirstRecordOnly>
@@ -294,7 +277,7 @@
             <field>Id</field>
             <operator>EqualTo</operator>
             <value>
-                <elementReference>sourceFPChoice</elementReference>
+                <elementReference>sourceFPIdVar</elementReference>
             </value>
         </filters>
         <getFirstRecordOnly>true</getFirstRecordOnly>
@@ -308,7 +291,7 @@
         <locationY>134</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
-            <targetReference>pickSourceSC</targetReference>
+            <targetReference>pickSourceSCAndFP</targetReference>
         </connector>
         <filterLogic>and</filterLogic>
         <filters>
@@ -358,15 +341,15 @@
         <showHeader>true</showHeader>
     </screens>
     <screens>
-        <name>pickSourceSC</name>
-        <label>Select Source System Context</label>
+        <name>pickSourceSCAndFP</name>
+        <label>Select Source Context and Process</label>
         <locationX>176</locationX>
         <locationY>242</locationY>
         <allowBack>false</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>false</allowPause>
         <connector>
-            <targetReference>pickSourceProcess</targetReference>
+            <targetReference>getSourceFP</targetReference>
         </connector>
         <fields>
             <name>selectedSCId</name>
@@ -381,13 +364,13 @@
             <inputParameters>
                 <name>fieldApiName</name>
                 <value>
-                    <stringValue>Id</stringValue>
+                    <stringValue>cfp_System_Context__c</stringValue>
                 </value>
             </inputParameters>
             <inputParameters>
                 <name>objectApiName</name>
                 <value>
-                    <stringValue>cfp_System_Context__c</stringValue>
+                    <stringValue>cfp_FunctionalProcess__c</stringValue>
                 </value>
             </inputParameters>
             <inputParameters>
@@ -402,27 +385,39 @@
                 <name>recordId</name>
             </outputParameters>
         </fields>
-        <showFooter>true</showFooter>
-        <showHeader>true</showHeader>
-    </screens>
-    <screens>
-        <name>pickSourceProcess</name>
-        <label>Select Functional Process</label>
-        <locationX>176</locationX>
-        <locationY>350</locationY>
-        <allowBack>true</allowBack>
-        <allowFinish>true</allowFinish>
-        <allowPause>false</allowPause>
-        <connector>
-            <targetReference>getSourceFP</targetReference>
-        </connector>
         <fields>
             <name>sourceFPChoice</name>
-            <choiceReferences>filteredFPChoices</choiceReferences>
-            <dataType>String</dataType>
-            <fieldText>Select the Functional Process to replicate</fieldText>
-            <fieldType>DropdownBox</fieldType>
+            <extensionName>flowruntime:lookup</extensionName>
+            <fieldType>ComponentInstance</fieldType>
+            <inputParameters>
+                <name>label</name>
+                <value>
+                    <stringValue>Functional Process to replicate</stringValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>fieldApiName</name>
+                <value>
+                    <stringValue>cfp_FunctionalProcess__c</stringValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>objectApiName</name>
+                <value>
+                    <stringValue>cfp_Data_Movements__c</stringValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>required</name>
+                <value>
+                    <booleanValue>true</booleanValue>
+                </value>
+            </inputParameters>
             <isRequired>true</isRequired>
+            <outputParameters>
+                <assignToReference>sourceFPIdVar</assignToReference>
+                <name>recordId</name>
+            </outputParameters>
         </fields>
         <showFooter>true</showFooter>
         <showHeader>true</showHeader>
@@ -468,6 +463,13 @@
     </variables>
     <variables>
         <name>selectedSCIdVar</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>sourceFPIdVar</name>
         <dataType>String</dataType>
         <isCollection>false</isCollection>
         <isInput>false</isInput>
