@@ -29,6 +29,21 @@ Exception: security warnings, irreversible ops, ambiguous multi-step sequences -
 
 - Store in `.cursor/plans/`
 - Filename: `YYYY-MM-DD-<description>.plan.md`
+- Each decision in `## Decisions` MUST include at least one worst-case scenario (e.g. "50 records across 8 SCs — how does user find the right one?")
+- **Mandatory gate: grill the plan before implementation starts.** Use `grill-with-docs` skill. No code or metadata until grilling is complete and plan is updated.
+
+## Salesforce Skills — MANDATORY
+
+**THIS IS NON-NEGOTIABLE. NO EXCEPTIONS.**
+
+Any task touching Salesforce — metadata, flows, Apex, LWC, objects, fields, permission sets, deployments, queries, configs — MUST invoke the matching skill via the `Skill` tool BEFORE any other action, including clarifying questions.
+
+Available Salesforce skills include (not exhaustive):
+`generating-flow`, `generating-apex`, `generating-apex-test`, `generating-custom-object`, `generating-custom-field`, `generating-permission-set`, `generating-lwc-component`, `generating-lightning-app`, `generating-flexipage`, `generating-validation-rule`, `generating-list-view`, `diff-org-changes`, `switching-org`, `deploying-ui-bundle`, and more.
+
+**If no exact skill matches: invoke `find-skills` to discover one. If truly none exists: proceed but note the gap.**
+
+Failure to invoke a skill for a Salesforce task = instruction violation.
 
 ## Metadata Generation (Salesforce)
 
@@ -44,18 +59,30 @@ Follow the gate sequence in `.claude/rules/a4v-expert-global-rule.md`:
 
 Never write metadata without a loaded skill. Never skip MCP attempt.
 
+### Flow screen components
+
+When a flow screen uses any `flowruntime:` or LWC component, verify output attribute names before writing XML — via skill, MCP, or component source. Never infer from memory. Record verification in pre-write gate.
+
+### New fields → permission set access
+
+After generating any new custom field:
+1. Run `find src/main/default/permissionsets force-app -name "*.permissionset-meta.xml"` to discover all permission sets in the repo
+2. Present the list to the user
+3. User selects which sets need access
+4. Update only the approved sets before proceeding
+
 ## Commands
 
 | Command | Description |
 |---------|-------------|
 | `/commit-push-done` | Stage, commit, push, merge to main, cleanup branch |
-| `/diff-org-changes` | Compare org metadata vs local source |
+| `/diff-org-changes` | Compare org metadata vs local source (runs `scripts/diff/diff_org_changes.py`) |
 
 ## Scripts
 
 | Script | Usage |
 |--------|-------|
-| `scripts/diff/diff-org-changes.sh <alias> [file]` | Diff org vs local. File relative to `src/main/default/` |
+| `scripts/diff/diff_org_changes.py --org <alias> [--file <path>]` | Diff org vs local. File relative to `main/default/` |
 | `scripts/data/export-data.sh` | Export data |
 | `scripts/data/import-data.sh` | Import data |
 
