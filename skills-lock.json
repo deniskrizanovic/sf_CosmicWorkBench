@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "skills": {
+    "diff-org-changes": {
+      "source": "deniskrizanovic/dk-skills",
+      "sourceType": "github",
+      "skillPath": "diff-org-changes/SKILL.md",
+      "computedHash": "0bd724c82e5d6c5889c9eb4394bd25174a53a7d16f3140c99baab6d95f07fa3d"
+    }
+  }
+}
