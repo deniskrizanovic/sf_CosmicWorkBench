@@ -52,8 +52,7 @@ A COSMIC Generic Software Model of the CosmicWorkBench Salesforce app itself
 | FP07 | Add Email Notification Movements | 3 | [07](./07-add-email-notification.md) |
 | FP08 | Import Data Movements from JSON | 5 | [08](./08-import-data-movements-from-json.md) |
 | FP09 | Visualise Functional Process | 3 | [09](./09-visualise-functional-process.md) |
-| FP10 | Edit Data Movements Inline *(no persistence)* | 2 | [10](./10-edit-data-movements-inline.md) |
-| | **Subtotal** | **51** | |
+| | **Subtotal** | **49** | |
 
 ### Reporting processes
 
@@ -86,10 +85,10 @@ process is individually sized in its file.
 
 | Group | Processes | CFP |
 |-------|-----------|-----|
-| Custom-built | 10 | 51 |
+| Custom-built | 9 | 49 |
 | Reporting | 6 | 24 |
 | OOTB CRUD | 19 | 62 |
-| **Total** | **35** | **137 CFP** |
+| **Total** | **34** | **135 CFP** |
 
 ---
 
@@ -100,9 +99,7 @@ process is individually sized in its file.
    should be a standalone process.
 2. **FP07 Exit** — counted a completion Exit (3 CFP); drop to 2 CFP if the wrapper flow
    shows no user-visible confirmation in the running org.
-3. **FP10 no persistence** — sized as-shipped (Entry+Exit, 2 CFP). Rises if inline-save
-   persistence is added.
-4. **OOTB List views** — counted one List process per object; if list views aren't part of
+3. **OOTB List views** — counted one List process per object; if list views aren't part of
    the FUR being sized, remove 4 processes (−12 CFP).
-5. **Report Reads** — each report counts 2 Reads (FP + DM) from its join. If a report's
+4. **Report Reads** — each report counts 2 Reads (FP + DM) from its join. If a report's
    grouping doesn't actually traverse both objects at runtime, adjust to 1 Read (−1 CFP each).
