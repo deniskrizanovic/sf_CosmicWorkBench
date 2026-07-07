@@ -33,5 +33,5 @@ FP10 in the Generic Software Model is sourced solely from the `cfp_DataMovements
 
 ## 6. Wrap Up
 
-- [ ] 6.1 Commit with conventional message (e.g. `chore(lwc): delete unused cfp_DataMovements component`)
-- [ ] 6.2 Push branch, merge to main, delete branch per git workflow
+- [x] 6.1 Commit with conventional message (e.g. `chore(lwc): delete unused cfp_DataMovements component`)
+- [x] 6.2 Push branch, merge to main, delete branch per git workflow
