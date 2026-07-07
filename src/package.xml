@@ -43,7 +43,6 @@
         <name>CustomObject</name>
     </types>
     <types>
-        <members>cfp_DataMovements</members>
         <members>cfp_FunctionalProcessVisualiser</members>
         <name>LightningComponentBundle</name>
     </types>
