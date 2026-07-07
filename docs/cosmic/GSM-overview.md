@@ -39,6 +39,15 @@ A COSMIC Generic Software Model of the CosmicWorkBench Salesforce app itself
 
 ## Functional process register
 
+## Total functional size
+
+| Group | Processes | CFP |
+|-------|-----------|-----|
+| Custom-built | 9 | 49 |
+| Reporting | 6 | 24 |
+| OOTB CRUD | 19 | 62 |
+| **Total** | **34** | **135 CFP** |
+
 ### Custom-built processes
 
 | ID | Process | CFP | File |
@@ -81,14 +90,6 @@ process is individually sized in its file.
 
 ---
 
-## Total functional size
-
-| Group | Processes | CFP |
-|-------|-----------|-----|
-| Custom-built | 9 | 49 |
-| Reporting | 6 | 24 |
-| OOTB CRUD | 19 | 62 |
-| **Total** | **34** | **135 CFP** |
 
 ---
 
